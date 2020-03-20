@@ -17,9 +17,9 @@ if (feature.properties && feature.properties.popupContent) {
 };
 
 //GeoJSON-Dateien
-var Autobahn =
+//var Autobahn =
 
-var Messtellen = 
+//var Messtellen = 
 ;
 
 
