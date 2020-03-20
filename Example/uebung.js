@@ -96,7 +96,7 @@ Modify.modify.on('modifyend', function(e) {
 			name: attributeValue
 		})
 		new_feature.setId(id);
-		new_feature.setGeometryName("geom"); 
+		new_feature.setGeometryName("geom");
 		transactWFS('update', new_feature);
 		request = new XMLHttpRequest();
 		request.onload = function () {
@@ -104,8 +104,8 @@ Modify.modify.on('modifyend', function(e) {
 			var data = request.responseText;
 			console.log("==Server Response==");
 			console.log(status);
-			console.log(data);	
-		};		  
+			console.log(data);
+		};
 		request.open(method, url, async);
 		request.setRequestHeader("Content-Type", "application/xml;charset=UTF-8");
 		request.send(postDataOL);
@@ -144,21 +144,21 @@ Draw.Point.on('drawend',function(evt){
 		geom: p,
 		name: attributeValue
 	})
-	transactWFS('insert', new_feature);		
+	transactWFS('insert', new_feature);
 	request = new XMLHttpRequest();
 	request.onload = function () {
 		var status = request.status;
 		var data = request.responseText;
 		console.log("==Server Response==");
 		console.log(status);
-		console.log(data);	
+		console.log(data);
 	};
 	request.open(method, url, async);
 	request.setRequestHeader("Content-Type", "application/xml;charset=UTF-8");
 	request.send(postDataOL);
 });
 
- 
+
 optionsForm.onchange = function(e) {
 	var type = e.target.getAttribute('name');
 	var value = e.target.value;
@@ -185,9 +185,9 @@ map.addInteraction(snap);
 var transactWFS = function (mode, f) {
 	var formatWFS = new ol.format.WFS();
 	var formatGML = new ol.format.GML({
-		featureNS: 'http://geoserver.org/testuebung',	
-		featurePrefix: 'testuebung',					
-		featureType: 'punkte'//,						
+		featureNS: 'http://geoserver.org/testuebung',
+		featurePrefix: 'testuebung',
+		featureType: 'punkte'//,
 	});
 	var xs = new XMLSerializer();
 	var node;
