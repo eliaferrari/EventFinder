@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="???">
+  <title>Projektarbeit Geoinformatik</title>
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="">
+
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+  <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+
+  <style>
+
+    body {
+      background-color: #444444;
+      }
+
+    .containerhead{
+          position: top;
+          width: 100%;
+          height: 50px;
+          font-family: 'Quicksand';
+          font-style: bold;
+          font-size: 25px;
+          Padding: 25px;
+          color: white;
+
+    }
+    .containerbottom {
+        position: sticky;
+        bottom: 5px;
+        width: 100%;
+        height: 100px;
+        font-family: 'Quicksand';
+        font-size: 12px;
+        color: white;
+      }
+
+    .containertext {
+      position: relative;
+      width: 90%;
+      height: 150px;
+      left: 5%;
+      font-family: 'Quicksand';
+      font-size: 16px;
+      text-align: left;
+      color: white;
+      padding-top: 30px;
+    }
+
+    .bottomright {
+      position: absolute;
+      bottom: 8px;
+      right: 16px;
+
+    }
+
+    .bottomleft {
+      position: absolute;
+      bottom: 8px;
+      left: 16px;
+    }
+    .bottomcenter {
+      position: absolute;
+      left: 48%;
+      bottom: 8px;
+    }
+
+    map {
+      width: 100%;
+      height: auto;
+      opacity: 0.3;
+    }
+  </style>
+
+</head>
+<body >
+  <div class="containerhead">
+  <div>Veranstaltungen in der Schweiz</div>
+</div>
+  <div id="map" style="width: 90%; height: 700px; position: relative; left: 5%;" class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
+  </div>
+
+  <div class="containertext">
+    <div> Optimierung der Veranstaltungsangebot anhand von persönlichen
+			Interessen und Geolocation. </div>
+  <div class="containerbottom" >
+    <div class="bottomleft">Projektarbeit Geoinformatik</div>
+    <div class="bottomcenter">Mai 2020</div>
+    <div class="bottomright">Enea Gentilini, Philipp Brunner; Elia Ferrari</div>
+  <script src="???"></script>
+
+
+</body>
+
+
+</html>
