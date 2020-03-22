@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<link rel="stylesheet" href="stylesheet.css">
+  <link rel="stylesheet" href="stylesheet.css">
   <title>Projektarbeit Geoinformatik</title>
 
 
@@ -16,21 +17,40 @@
   </style>
 
 </head>
-<body >
-  <div class="containerhead">
-  <div>Veranstaltungen in der Schweiz</div>
-</div>
+
+<body>
+  <div class="title">Veranstaltungen in der Schweiz</div>
+
+  <form id="form1">
+    <div class="title2"> Select your options: </div>
+    <label for="Type">Event Type:</label>
+      <select id="Type">
+        <option>Concerts</option>
+        <option>Conference</option>
+        <option>Theater</option>
+        <option>Musical</option>
+      </select>
+      <br><br>
+      <label for="birthday">Birthday:</label>
+      <input type="date" id="date" name="date">
+    </div>
+
+    <br><br>
+    <input type="button" onclick="confirm()" value="Confirm">
+    <input type="button" onclick="reset()" value="Reset">
+  </form>
+
   <div id="map" style="width: 90%; height: 700px; position: relative; left: 5%;" class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
   </div>
 
   <div class="containertext">
     <div> Optimierung der Veranstaltungsangebot anhand von persönlichen
-			Interessen und Geolocation. </div>
-  <div class="containerbottom" >
-    <div class="bottomleft">Projektarbeit Geoinformatik</div>
-    <div class="bottomcenter">Mai 2020</div>
-    <div class="bottomright">Enea Gentilini, Philipp Brunner; Elia Ferrari</div>
-  <script src="leaflet.js"></script>
+      Interessen und Geolocation. </div>
+    <div class="containerbottom">
+      <div class="bottomleft">Projektarbeit Geoinformatik</div>
+      <div class="bottomcenter">Mai 2020</div>
+      <div class="bottomright">Enea Gentilini, Philipp Brunner; Elia Ferrari</div>
+      <script src="leaflet.js"></script>
 
 
 </body>

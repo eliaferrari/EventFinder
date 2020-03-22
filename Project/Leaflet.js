@@ -16,6 +16,14 @@ if (feature.properties && feature.properties.popupContent) {
 }
 };
 
+
+//Function Form
+function confirm() {
+  document.getElementById("form1").submit();
+}
+function reset() {
+  document.getElementById("form1").disabled=false;
+}
 //GeoJSON-Dateien
 //var Autobahn =
 

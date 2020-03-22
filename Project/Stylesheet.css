@@ -2,7 +2,12 @@ body {
   background-color: #444444;
 }
 
-.containerhead {
+form {
+  margin-left: 50px;
+  margin-bottom: 50px;
+}
+
+.title {
   position: top;
   width: 100%;
   height: 50px;
@@ -12,7 +17,29 @@ body {
   Padding: 25px;
   color: white;
 }
+
+.title2 {
+  position: top;
+  width: 100%;
+  height: 30px;
+  font-family: 'Quicksand';
+  font-style: bold;
+  font-size: 25px;
+  padding-bottom: 10px;
+  color: white;
 }
+
+.form_text {
+  position: top;
+  width: 100%;
+  height: 30px;
+  font-family: 'Quicksand';
+  font-style: bold;
+  font-size: 25px;
+  Padding: 25px;
+  color: white;
+}
+
 
 .containerbottom {
   position: sticky;
