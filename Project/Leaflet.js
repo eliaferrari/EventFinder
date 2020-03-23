@@ -34,7 +34,7 @@ function confirm() {
   document.getElementById("form1").submit();
 }
 function reset() {
-  document.getElementById("form1").disabled=false;
+  document.getElementById("form1").reset()
 }
 
 
