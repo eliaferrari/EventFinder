@@ -23,16 +23,21 @@
 
   <form id="form1">
     <div class="title2"> Select your options: </div>
-    <label for="Type">Event Type:</label>
-      <select id="Type">
+    <label for="Type" class="form_label">Event Type:</label>
+      <select id="Type" class="form_text">
         <option>Concerts</option>
         <option>Conference</option>
         <option>Theater</option>
         <option>Musical</option>
       </select>
       <br><br>
-      <label for="birthday">Birthday:</label>
-      <input type="date" id="date" name="date">
+      <label for="date" class="form_label"> Event date: </label>
+      <input type="date" id="date" name="date" class="form_text">
+      <br><br>
+      <label for="location" class="form_label" class="form_text"> Location: </label>
+      <input type="text"  value="" class="form_text" id="myLocation">
+      <input type="button" onclick="getLocation()" value="Your location" id="location" class="form_text">
+
     </div>
 
     <br><br>

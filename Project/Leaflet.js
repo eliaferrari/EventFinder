@@ -9,12 +9,24 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
   id: 'mapbox.streets'
 }).addTo(map);
 
-function onEachFeature(feature, layer) {
-// does this feature have a property named popupContent?
-if (feature.properties && feature.properties.popupContent) {
-  layer.bindPopup(feature.properties.popupContent);
+//Geolocation
+var x = document.getElementById("location");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
 }
-};
+
+//elaborate the content of the location form tab
+var test = "Insert CAP or city";
+document.getElementById("myLocation").value = test;
+function showPosition(position) {
+  document.getElementById("myLocation").value = position.coords.latitude + ";"+ position.coords.longitude;
+
+}
 
 
 //Function Form
@@ -24,6 +36,22 @@ function confirm() {
 function reset() {
   document.getElementById("form1").disabled=false;
 }
+
+
+
+
+
+//Old**********************************************************
+
+function onEachFeature(feature, layer) {
+// does this feature have a property named popupContent?
+if (feature.properties && feature.properties.popupContent) {
+  layer.bindPopup(feature.properties.popupContent);
+}
+};
+
+
+
 //GeoJSON-Dateien
 //var Autobahn =
 
