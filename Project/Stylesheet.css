@@ -6,31 +6,49 @@
   normal:
 }
 
+html {
+
+  width: auto;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
 
 body {
+  background-image: url("IMG/Background.jpeg");
   background-color: var(--darkgrey);
+  width: inherit;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 form {
-  margin-left: 50px;
-  margin-bottom: 50px;
+  margin: 30px;
+  background-color: var(--darkgrey);
+  opacity: 0.7;
+  padding: 30px;
+
 }
 
 .title {
   position: top;
-  width: 100%;
+  text-align: center;
+  width: inherit;
   height: 50px;
   font-family: 'Quicksand';
   font-style: bold;
   font-size: 25px;
-  Padding: 25px;
+  margin: 30px;
   color: white;
+  background-color: var(--darkgrey);
+  opacity: 0.7;
 }
 
 .title2 {
   position: top;
-  width: 100%;
+  width: inherit;
   height: 30px;
   font-family: 'Quicksand';
   font-style: bold;
@@ -59,7 +77,7 @@ form {
 .containerbottom {
   position: sticky;
   bottom: 5px;
-  width: 100%;
+  width: inherit;
   height: 100px;
   font-family: 'Quicksand';
   font-size: 12px;
@@ -98,7 +116,7 @@ form {
 
 .title {
   position: top;
-  width: 100%;
+  width: inherit;
   height: 50px;
   font-family: 'Quicksand';
   font-style: bold;
@@ -108,7 +126,7 @@ form {
 }
 
 map {
-  width: 100%;
+  width: 80%;
   height: auto;
   opacity: 0.3;
 }
