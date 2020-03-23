@@ -78,10 +78,12 @@ form {
   position: sticky;
   bottom: 5px;
   width: inherit;
-  height: 100px;
+  height: 30px;
   font-family: 'Quicksand';
   font-size: 12px;
   color: white;
+  background-color: var(--darkgrey);
+  opacity: 0.7;
 }
 
 .containertext {
