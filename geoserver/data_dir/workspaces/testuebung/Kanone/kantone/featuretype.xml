@@ -1,0 +1,65 @@
+<featureType>
+  <id>FeatureTypeInfoImpl--8ea2019:1709ae563f3:-7ffc</id>
+  <name>kantone</name>
+  <nativeName>g1k20</nativeName>
+  <namespace>
+    <id>NamespaceInfoImpl--755ec1d2:1709a77f078:-7ffe</id>
+  </namespace>
+  <title>kantone</title>
+  <keywords>
+    <string>features</string>
+    <string>g1k20</string>
+    <string>kanone</string>
+  </keywords>
+  <nativeCRS class="projected">PROJCS[&quot;CH1903+ / LV95&quot;, &#xd;
+  GEOGCS[&quot;CH1903+&quot;, &#xd;
+    DATUM[&quot;CH1903+&quot;, &#xd;
+      SPHEROID[&quot;Bessel 1841&quot;, 6377397.155, 299.1528128, AUTHORITY[&quot;EPSG&quot;,&quot;7004&quot;]], &#xd;
+      TOWGS84[674.374, 15.056, 405.346, 0.0, 0.0, 0.0, 0.0], &#xd;
+      AUTHORITY[&quot;EPSG&quot;,&quot;6150&quot;]], &#xd;
+    PRIMEM[&quot;Greenwich&quot;, 0.0, AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]], &#xd;
+    UNIT[&quot;degree&quot;, 0.017453292519943295], &#xd;
+    AXIS[&quot;Geodetic longitude&quot;, EAST], &#xd;
+    AXIS[&quot;Geodetic latitude&quot;, NORTH], &#xd;
+    AUTHORITY[&quot;EPSG&quot;,&quot;4150&quot;]], &#xd;
+  PROJECTION[&quot;Oblique_Mercator&quot;, AUTHORITY[&quot;EPSG&quot;,&quot;9815&quot;]], &#xd;
+  PARAMETER[&quot;longitude_of_center&quot;, 7.439583333333333], &#xd;
+  PARAMETER[&quot;latitude_of_center&quot;, 46.952405555555565], &#xd;
+  PARAMETER[&quot;azimuth&quot;, 90.0], &#xd;
+  PARAMETER[&quot;scale_factor&quot;, 1.0], &#xd;
+  PARAMETER[&quot;false_easting&quot;, 2600000.0], &#xd;
+  PARAMETER[&quot;false_northing&quot;, 1200000.0], &#xd;
+  PARAMETER[&quot;rectified_grid_angle&quot;, 90.0], &#xd;
+  UNIT[&quot;m&quot;, 1.0], &#xd;
+  AXIS[&quot;Easting&quot;, EAST], &#xd;
+  AXIS[&quot;Northing&quot;, NORTH], &#xd;
+  AUTHORITY[&quot;EPSG&quot;,&quot;2056&quot;]]</nativeCRS>
+  <srs>EPSG:2056</srs>
+  <nativeBoundingBox>
+    <minx>2485424.0</minx>
+    <maxx>2833837.0</maxx>
+    <miny>1075268.2524999976</miny>
+    <maxy>1295937.2625</maxy>
+    <crs class="projected">EPSG:2056</crs>
+  </nativeBoundingBox>
+  <latLonBoundingBox>
+    <minx>5.909139104047214</minx>
+    <maxx>10.558852570891796</maxx>
+    <miny>45.78873511179975</miny>
+    <maxy>47.81395532384518</maxy>
+    <crs>EPSG:4326</crs>
+  </latLonBoundingBox>
+  <projectionPolicy>FORCE_DECLARED</projectionPolicy>
+  <enabled>true</enabled>
+  <store class="dataStore">
+    <id>DataStoreInfoImpl--8ea2019:1709ae563f3:-7ffd</id>
+  </store>
+  <serviceConfiguration>false</serviceConfiguration>
+  <maxFeatures>0</maxFeatures>
+  <numDecimals>0</numDecimals>
+  <padWithZeros>false</padWithZeros>
+  <forcedDecimal>false</forcedDecimal>
+  <overridingServiceSRS>false</overridingServiceSRS>
+  <skipNumberMatched>false</skipNumberMatched>
+  <circularArcPresent>false</circularArcPresent>
+</featureType>

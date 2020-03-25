@@ -1,0 +1,42 @@
+<!-- Dieses Beispiel editieren und in den GeoServer data_dir\www Ordner kopieren -->
+<!-- Aufrufen mit: http://localhost:8080/geoserver/www/<Dateiname>.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8">
+	<title>OpenLayers-01-WFS Display</title>
+	<link rel="stylesheet" href="ol/ol.css" type="text/css">
+	<style>.map {height: 400px; width: 100%;}</style>
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+	<script src="ol/ol.js"></script>
+  </head>
+  <body>
+    <h2>OpenLayers WFS mit Modify Feature und Snap Interaction</h2>
+	<div id="map" class="map"></div>
+	<!--Optionenauswahl, um Features hinzuzufügen bzw. zu bearbeiten-->
+	<form id="options-form" automplete="off">
+        <div class="radio">
+            <label>
+                <input type="radio" name="interaction" value="draw" id="draw" checked>
+                Add Feature &nbsp;
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="interaction" value="modify">
+                Modify Feature &nbsp;
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Draw type &nbsp;</label>
+            <select name="draw-type" id="draw-type">
+                <option value="Point">Point</option>
+                <option value="LineString">LineString</option>
+                <option value="Polygon">Polygon</option>
+            </select>
+        </div>
+    </form>	
+	<script src="ol_wfs_02_modify.js"></script>
+  </body>
+</html>

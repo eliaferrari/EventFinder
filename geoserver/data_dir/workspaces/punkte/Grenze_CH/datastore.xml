@@ -1,0 +1,22 @@
+<dataStore>
+  <id>DataStoreInfoImpl-f216475:1708c2803b7:-7ff9</id>
+  <name>Grenze_CH</name>
+  <type>Shapefile</type>
+  <enabled>true</enabled>
+  <workspace>
+    <id>WorkspaceInfoImpl-f216475:1708c2803b7:-7fff</id>
+  </workspace>
+  <connectionParameters>
+    <entry key="charset">ISO-8859-1</entry>
+    <entry key="filetype">shapefile</entry>
+    <entry key="create spatial index">true</entry>
+    <entry key="memory mapped buffer">false</entry>
+    <entry key="timezone">Europe/Berlin</entry>
+    <entry key="enable spatial index">true</entry>
+    <entry key="namespace">http://geoserver.org/punkte</entry>
+    <entry key="cache and reuse memory maps">true</entry>
+    <entry key="url">file:data/Land_CH/Grenzen_Land_LV95.shp</entry>
+    <entry key="fstype">shape</entry>
+  </connectionParameters>
+  <__default>false</__default>
+</dataStore>

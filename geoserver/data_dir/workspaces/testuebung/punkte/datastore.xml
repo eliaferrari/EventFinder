@@ -1,10 +1,10 @@
 <dataStore>
-  <id>DataStoreInfoImpl-5f5c039:17080e7c03a:-7ffd</id>
+  <id>DataStoreInfoImpl-f216475:1708c2803b7:-7ffd</id>
   <name>punkte</name>
   <type>PostGIS</type>
   <enabled>true</enabled>
   <workspace>
-    <id>WorkspaceInfoImpl-5f5c039:17080e7c03a:-7fff</id>
+    <id>WorkspaceInfoImpl--755ec1d2:1709a77f078:-7fff</id>
   </workspace>
   <connectionParameters>
     <entry key="schema">public</entry>
@@ -25,7 +25,7 @@
     <entry key="Connection timeout">20</entry>
     <entry key="create database">false</entry>
     <entry key="port">5432</entry>
-    <entry key="passwd">crypt1:BbX/uSlGVMvZYWfFmqlfJYsNgxc3zkn0</entry>
+    <entry key="passwd">crypt1:eWg5PHMrOoCE+fqRjDZ4C94z/+71sA10</entry>
     <entry key="min connections">1</entry>
     <entry key="dbtype">postgis</entry>
     <entry key="namespace">http://geoserver.org/testuebung</entry>

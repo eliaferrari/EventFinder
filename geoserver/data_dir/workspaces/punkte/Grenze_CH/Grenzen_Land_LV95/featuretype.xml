@@ -1,0 +1,67 @@
+<featureType>
+  <id>FeatureTypeInfoImpl-f216475:1708c2803b7:-7ff7</id>
+  <name>Grenzen_Land_LV95</name>
+  <nativeName>Grenzen_Land_LV95</nativeName>
+  <namespace>
+    <id>NamespaceInfoImpl-f216475:1708c2803b7:-7ffe</id>
+  </namespace>
+  <title>Grenzen_Land_LV95</title>
+  <keywords>
+    <string>features</string>
+    <string>Grenzen_Land_LV95</string>
+  </keywords>
+  <nativeCRS class="projected">PROJCS[&quot;CH1903+ / LV95&quot;, &#xd;
+  GEOGCS[&quot;CH1903+&quot;, &#xd;
+    DATUM[&quot;CH1903+&quot;, &#xd;
+      SPHEROID[&quot;Bessel 1841&quot;, 6377397.155, 299.1528128, AUTHORITY[&quot;EPSG&quot;,&quot;7004&quot;]], &#xd;
+      TOWGS84[674.374, 15.056, 405.346, 0.0, 0.0, 0.0, 0.0], &#xd;
+      AUTHORITY[&quot;EPSG&quot;,&quot;6150&quot;]], &#xd;
+    PRIMEM[&quot;Greenwich&quot;, 0.0, AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]], &#xd;
+    UNIT[&quot;degree&quot;, 0.017453292519943295], &#xd;
+    AXIS[&quot;Geodetic longitude&quot;, EAST], &#xd;
+    AXIS[&quot;Geodetic latitude&quot;, NORTH], &#xd;
+    AUTHORITY[&quot;EPSG&quot;,&quot;4150&quot;]], &#xd;
+  PROJECTION[&quot;Oblique_Mercator&quot;, AUTHORITY[&quot;EPSG&quot;,&quot;9815&quot;]], &#xd;
+  PARAMETER[&quot;longitude_of_center&quot;, 7.439583333333333], &#xd;
+  PARAMETER[&quot;latitude_of_center&quot;, 46.952405555555565], &#xd;
+  PARAMETER[&quot;azimuth&quot;, 90.0], &#xd;
+  PARAMETER[&quot;scale_factor&quot;, 1.0], &#xd;
+  PARAMETER[&quot;false_easting&quot;, 2600000.0], &#xd;
+  PARAMETER[&quot;false_northing&quot;, 1200000.0], &#xd;
+  PARAMETER[&quot;rectified_grid_angle&quot;, 90.0], &#xd;
+  UNIT[&quot;m&quot;, 1.0], &#xd;
+  AXIS[&quot;Easting&quot;, EAST], &#xd;
+  AXIS[&quot;Northing&quot;, NORTH], &#xd;
+  AUTHORITY[&quot;EPSG&quot;,&quot;2056&quot;]]</nativeCRS>
+  <srs>EPSG:2056</srs>
+  <nativeBoundingBox>
+    <minx>2485411.0187909924</minx>
+    <maxx>2833840.7381635555</maxx>
+    <miny>1075271.487878117</miny>
+    <maxy>1295933.7895278796</maxy>
+    <crs class="projected">EPSG:2056</crs>
+  </nativeBoundingBox>
+  <latLonBoundingBox>
+    <minx>5.908966767023764</minx>
+    <maxx>10.558900556095868</maxx>
+    <miny>45.78876290447507</miny>
+    <maxy>47.813924108952904</maxy>
+    <crs>EPSG:4326</crs>
+  </latLonBoundingBox>
+  <projectionPolicy>FORCE_DECLARED</projectionPolicy>
+  <enabled>true</enabled>
+  <metadata>
+    <entry key="cachingEnabled">false</entry>
+  </metadata>
+  <store class="dataStore">
+    <id>DataStoreInfoImpl-f216475:1708c2803b7:-7ff9</id>
+  </store>
+  <serviceConfiguration>false</serviceConfiguration>
+  <maxFeatures>0</maxFeatures>
+  <numDecimals>0</numDecimals>
+  <padWithZeros>false</padWithZeros>
+  <forcedDecimal>false</forcedDecimal>
+  <overridingServiceSRS>false</overridingServiceSRS>
+  <skipNumberMatched>false</skipNumberMatched>
+  <circularArcPresent>false</circularArcPresent>
+</featureType>
