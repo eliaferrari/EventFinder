@@ -30,7 +30,7 @@ function showPosition(position) {
 
 
 //Function Form
-function confirm() {
+function submit() {
   document.getElementById("form1").submit();
 }
 function reset() {
