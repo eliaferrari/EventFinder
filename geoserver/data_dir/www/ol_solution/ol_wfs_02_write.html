@@ -1,0 +1,21 @@
+<!-- Dieses Beispiel editieren und in den GeoServer data_dir\www Ordner kopieren -->
+<!-- Aufrufen mit: http://localhost:8080/geoserver/www/<Dateiname>.html -->
+<!-- You need to be logged in as a user in geoserver -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8">
+    <title>OpenLayers WFS Write</title>
+	<link rel="stylesheet" href="ol/ol.css" type="text/css">
+	<style>.map {height: 400px; width: 100%;}</style>
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+	<script src="ol/ol.js"></script>
+   </head>
+  <body>
+    <h2>WFS Write</h2>
+	<div id="map" class="map"></div>
+	<script src="ol_wfs_02_write.js"></script>
+  </body>
+</html>
