@@ -1,10 +1,9 @@
 <GeoServerTileLayer>
-  <id>LayerInfoImpl--3ba9aafb:17111295e5d:-7ffb</id>
+  <id>LayerInfoImpl--51288e29:171345b9c87:-7ffe</id>
   <enabled>true</enabled>
   <inMemoryCached>true</inMemoryCached>
   <name>eventfinder:events</name>
   <mimeFormats>
-    <string>application/vnd.mapbox-vector-tile</string>
     <string>image/png</string>
     <string>image/jpeg</string>
   </mimeFormats>

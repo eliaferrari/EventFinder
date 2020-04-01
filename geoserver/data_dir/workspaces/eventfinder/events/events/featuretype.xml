@@ -1,52 +1,37 @@
 <featureType>
-  <id>FeatureTypeInfoImpl--3ba9aafb:17111295e5d:-7ffc</id>
+  <id>FeatureTypeInfoImpl--51288e29:171345b9c87:-7fff</id>
   <name>events</name>
   <nativeName>events</nativeName>
   <namespace>
     <id>NamespaceInfoImpl--3ba9aafb:17111295e5d:-7ffe</id>
   </namespace>
   <title>events</title>
-  <abstract>Event point database</abstract>
   <keywords>
     <string>features</string>
     <string>events</string>
   </keywords>
-  <nativeCRS class="projected">PROJCS[&quot;CH1903+ / LV95&quot;, 
-  GEOGCS[&quot;CH1903+&quot;, 
-    DATUM[&quot;CH1903+&quot;, 
-      SPHEROID[&quot;Bessel 1841&quot;, 6377397.155, 299.1528128, AUTHORITY[&quot;EPSG&quot;,&quot;7004&quot;]], 
-      TOWGS84[674.374, 15.056, 405.346, 0.0, 0.0, 0.0, 0.0], 
-      AUTHORITY[&quot;EPSG&quot;,&quot;6150&quot;]], 
-    PRIMEM[&quot;Greenwich&quot;, 0.0, AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]], 
-    UNIT[&quot;degree&quot;, 0.017453292519943295], 
-    AXIS[&quot;Geodetic longitude&quot;, EAST], 
-    AXIS[&quot;Geodetic latitude&quot;, NORTH], 
-    AUTHORITY[&quot;EPSG&quot;,&quot;4150&quot;]], 
-  PROJECTION[&quot;Oblique_Mercator&quot;, AUTHORITY[&quot;EPSG&quot;,&quot;9815&quot;]], 
-  PARAMETER[&quot;longitude_of_center&quot;, 7.439583333333333], 
-  PARAMETER[&quot;latitude_of_center&quot;, 46.952405555555565], 
-  PARAMETER[&quot;azimuth&quot;, 90.0], 
-  PARAMETER[&quot;scale_factor&quot;, 1.0], 
-  PARAMETER[&quot;false_easting&quot;, 2600000.0], 
-  PARAMETER[&quot;false_northing&quot;, 1200000.0], 
-  PARAMETER[&quot;rectified_grid_angle&quot;, 90.0], 
-  UNIT[&quot;m&quot;, 1.0], 
-  AXIS[&quot;Easting&quot;, EAST], 
-  AXIS[&quot;Northing&quot;, NORTH], 
-  AUTHORITY[&quot;EPSG&quot;,&quot;2056&quot;]]</nativeCRS>
-  <srs>EPSG:2056</srs>
+  <nativeCRS>GEOGCS[&quot;WGS 84&quot;, &#xd;
+  DATUM[&quot;World Geodetic System 1984&quot;, &#xd;
+    SPHEROID[&quot;WGS 84&quot;, 6378137.0, 298.257223563, AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]], &#xd;
+    AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]], &#xd;
+  PRIMEM[&quot;Greenwich&quot;, 0.0, AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]], &#xd;
+  UNIT[&quot;degree&quot;, 0.017453292519943295], &#xd;
+  AXIS[&quot;Geodetic longitude&quot;, EAST], &#xd;
+  AXIS[&quot;Geodetic latitude&quot;, NORTH], &#xd;
+  AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</nativeCRS>
+  <srs>EPSG:4326</srs>
   <nativeBoundingBox>
-    <minx>2485014.052451379</minx>
-    <maxx>2837016.9329778464</maxx>
-    <miny>1074188.6943776922</miny>
-    <maxy>1299782.763494124</maxy>
-    <crs class="projected">EPSG:2056</crs>
+    <minx>-180.0</minx>
+    <maxx>180.0</maxx>
+    <miny>-90.0</miny>
+    <maxy>90.0</maxy>
+    <crs>EPSG:4326</crs>
   </nativeBoundingBox>
   <latLonBoundingBox>
-    <minx>5.902661889303455</minx>
-    <maxx>10.603307634508944</maxx>
-    <miny>45.777927489452665</miny>
-    <maxy>47.84853460227672</maxy>
+    <minx>-180.0</minx>
+    <maxx>180.0</maxx>
+    <miny>-90.0</miny>
+    <maxy>90.0</maxy>
     <crs>EPSG:4326</crs>
   </latLonBoundingBox>
   <projectionPolicy>FORCE_DECLARED</projectionPolicy>
