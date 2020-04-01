@@ -9,7 +9,7 @@ CREATE TABLE public.events(id SERIAL PRIMARY KEY,
 						   website VARCHAR(200),
 						   ticket VARCHAR(200),
 						   teilnehmer int,
-						   geom GEOMETRY(Point, 2056) NOT NULL,
+						   geom GEOMETRY(Point, 4326) NOT NULL,
 						   catname VARCHAR(25),
 						   subcatname VARCHAR(25),
 						   CONSTRAINT catname FOREIGN KEY (catname)
