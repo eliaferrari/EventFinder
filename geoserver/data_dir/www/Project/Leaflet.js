@@ -46,35 +46,10 @@ var wmsLayer= L.tileLayer.wms("http://localhost:8080/geoserver/gwc/service/wms",
 });
 //map.addLayer(wmsLayer);
 
-        var camping = new L.tileLayer.wms("http://vps143339.ovh.net:8080/geoserver/camping/wms", {
-            layers: 'eventfinder:events',
-            format: 'image/png',
-            srs: "EPSG:3857",
-            transparent: true,
-            pointerCursor: true
-        }).addTo(map);
-        map.addEventListener('click', Identify);
+//var geojsonLayer = new L.GeoJSON.AJAX("http://localhost:8080/geoserver/eventfinder/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=eventfinder%3Aevents&maxFeatures=50&outputFormat=application%2Fjson");
 
-        function Identify(e) {
-            var BBOX = map.getBounds().toBBoxString();
-            var WIDTH = map.getSize().x;
-            var HEIGHT = map.getSize().y;
-            var X = map.layerPointToContainerPoint(e.layerPoint).x;
-            var Y = map.layerPointToContainerPoint(e.layerPoint).y;
-            var URL = wms_server + '&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS=camping:camping&QUERY_LAYERS=camping:camping&BBOX=' + BBOX + '&FEATURE_COUNT=1&HEIGHT=' + HEIGHT + '&WIDTH=' + WIDTH + '&INFO_FORMAT=text%2Fhtml&SRS=EPSG%3A3857&X=' + X + '&Y=' + Y;
-            $.ajax({
-                url: URL,
-                datatype: "html",
-                type: "GET",
-                success: function(data) {
-                    var popup = new L.popup({
-                        maxWith: 300
-                    });
-                    popup.setContent(data);
-                    popup.setLatLng(e.latlng);
-                    map.openPopup(popup);
-                }
-            });
-        }
 
+var geojsonLayer = L.geoJson.ajax("http://localhost:8080/geoserver/eventfinder/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=eventfinder%3Aevents&maxFeatures=50&outputFormat=application%2Fjson");
+
+geojsonLayer.addTo(map);
 //GEOSERVER WITH GEOJSO
