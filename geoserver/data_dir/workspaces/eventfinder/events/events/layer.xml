@@ -1,12 +1,12 @@
 <layer>
   <name>events</name>
-  <id>LayerInfoImpl--3ba9aafb:17111295e5d:-7ffb</id>
+  <id>LayerInfoImpl--51288e29:171345b9c87:-7ffe</id>
   <type>VECTOR</type>
   <defaultStyle>
     <id>StyleInfoImpl--570ae188:124761b8d78:-7fdf</id>
   </defaultStyle>
   <resource class="featureType">
-    <id>FeatureTypeInfoImpl--3ba9aafb:17111295e5d:-7ffc</id>
+    <id>FeatureTypeInfoImpl--51288e29:171345b9c87:-7fff</id>
   </resource>
   <attribution>
     <logoWidth>0</logoWidth>

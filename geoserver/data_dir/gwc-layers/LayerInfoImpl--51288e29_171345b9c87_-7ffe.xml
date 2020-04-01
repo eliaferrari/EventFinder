@@ -1,18 +1,18 @@
 <GeoServerTileLayer>
-  <id>LayerInfoImpl--3ba9aafb:17111295e5d:-7ffb</id>
+  <id>LayerInfoImpl--51288e29:171345b9c87:-7ffe</id>
   <enabled>true</enabled>
   <inMemoryCached>true</inMemoryCached>
   <name>eventfinder:events</name>
   <mimeFormats>
-    <string>image/jpeg</string>
     <string>image/png</string>
+    <string>image/jpeg</string>
   </mimeFormats>
   <gridSubsets>
     <gridSubset>
-      <gridSetName>EPSG:4326</gridSetName>
+      <gridSetName>EPSG:900913</gridSetName>
     </gridSubset>
     <gridSubset>
-      <gridSetName>EPSG:900913</gridSetName>
+      <gridSetName>EPSG:4326</gridSetName>
     </gridSubset>
   </gridSubsets>
   <metaWidthHeight>
