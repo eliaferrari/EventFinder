@@ -4,15 +4,16 @@
   <inMemoryCached>true</inMemoryCached>
   <name>eventfinder:events</name>
   <mimeFormats>
-    <string>image/jpeg</string>
+    <string>application/vnd.mapbox-vector-tile</string>
     <string>image/png</string>
+    <string>image/jpeg</string>
   </mimeFormats>
   <gridSubsets>
     <gridSubset>
-      <gridSetName>EPSG:4326</gridSetName>
+      <gridSetName>EPSG:900913</gridSetName>
     </gridSubset>
     <gridSubset>
-      <gridSetName>EPSG:900913</gridSetName>
+      <gridSetName>EPSG:4326</gridSetName>
     </gridSubset>
   </gridSubsets>
   <metaWidthHeight>

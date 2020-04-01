@@ -11,28 +11,28 @@
     <string>features</string>
     <string>events</string>
   </keywords>
-  <nativeCRS class="projected">PROJCS[&quot;CH1903+ / LV95&quot;, &#xd;
-  GEOGCS[&quot;CH1903+&quot;, &#xd;
-    DATUM[&quot;CH1903+&quot;, &#xd;
-      SPHEROID[&quot;Bessel 1841&quot;, 6377397.155, 299.1528128, AUTHORITY[&quot;EPSG&quot;,&quot;7004&quot;]], &#xd;
-      TOWGS84[674.374, 15.056, 405.346, 0.0, 0.0, 0.0, 0.0], &#xd;
-      AUTHORITY[&quot;EPSG&quot;,&quot;6150&quot;]], &#xd;
-    PRIMEM[&quot;Greenwich&quot;, 0.0, AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]], &#xd;
-    UNIT[&quot;degree&quot;, 0.017453292519943295], &#xd;
-    AXIS[&quot;Geodetic longitude&quot;, EAST], &#xd;
-    AXIS[&quot;Geodetic latitude&quot;, NORTH], &#xd;
-    AUTHORITY[&quot;EPSG&quot;,&quot;4150&quot;]], &#xd;
-  PROJECTION[&quot;Oblique_Mercator&quot;, AUTHORITY[&quot;EPSG&quot;,&quot;9815&quot;]], &#xd;
-  PARAMETER[&quot;longitude_of_center&quot;, 7.439583333333333], &#xd;
-  PARAMETER[&quot;latitude_of_center&quot;, 46.952405555555565], &#xd;
-  PARAMETER[&quot;azimuth&quot;, 90.0], &#xd;
-  PARAMETER[&quot;scale_factor&quot;, 1.0], &#xd;
-  PARAMETER[&quot;false_easting&quot;, 2600000.0], &#xd;
-  PARAMETER[&quot;false_northing&quot;, 1200000.0], &#xd;
-  PARAMETER[&quot;rectified_grid_angle&quot;, 90.0], &#xd;
-  UNIT[&quot;m&quot;, 1.0], &#xd;
-  AXIS[&quot;Easting&quot;, EAST], &#xd;
-  AXIS[&quot;Northing&quot;, NORTH], &#xd;
+  <nativeCRS class="projected">PROJCS[&quot;CH1903+ / LV95&quot;, 
+  GEOGCS[&quot;CH1903+&quot;, 
+    DATUM[&quot;CH1903+&quot;, 
+      SPHEROID[&quot;Bessel 1841&quot;, 6377397.155, 299.1528128, AUTHORITY[&quot;EPSG&quot;,&quot;7004&quot;]], 
+      TOWGS84[674.374, 15.056, 405.346, 0.0, 0.0, 0.0, 0.0], 
+      AUTHORITY[&quot;EPSG&quot;,&quot;6150&quot;]], 
+    PRIMEM[&quot;Greenwich&quot;, 0.0, AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]], 
+    UNIT[&quot;degree&quot;, 0.017453292519943295], 
+    AXIS[&quot;Geodetic longitude&quot;, EAST], 
+    AXIS[&quot;Geodetic latitude&quot;, NORTH], 
+    AUTHORITY[&quot;EPSG&quot;,&quot;4150&quot;]], 
+  PROJECTION[&quot;Oblique_Mercator&quot;, AUTHORITY[&quot;EPSG&quot;,&quot;9815&quot;]], 
+  PARAMETER[&quot;longitude_of_center&quot;, 7.439583333333333], 
+  PARAMETER[&quot;latitude_of_center&quot;, 46.952405555555565], 
+  PARAMETER[&quot;azimuth&quot;, 90.0], 
+  PARAMETER[&quot;scale_factor&quot;, 1.0], 
+  PARAMETER[&quot;false_easting&quot;, 2600000.0], 
+  PARAMETER[&quot;false_northing&quot;, 1200000.0], 
+  PARAMETER[&quot;rectified_grid_angle&quot;, 90.0], 
+  UNIT[&quot;m&quot;, 1.0], 
+  AXIS[&quot;Easting&quot;, EAST], 
+  AXIS[&quot;Northing&quot;, NORTH], 
   AUTHORITY[&quot;EPSG&quot;,&quot;2056&quot;]]</nativeCRS>
   <srs>EPSG:2056</srs>
   <nativeBoundingBox>
@@ -51,6 +51,19 @@
   </latLonBoundingBox>
   <projectionPolicy>FORCE_DECLARED</projectionPolicy>
   <enabled>true</enabled>
+  <metadata>
+    <entry key="elevation">
+      <dimensionInfo>
+        <enabled>false</enabled>
+      </dimensionInfo>
+    </entry>
+    <entry key="time">
+      <dimensionInfo>
+        <enabled>false</enabled>
+      </dimensionInfo>
+    </entry>
+    <entry key="cachingEnabled">false</entry>
+  </metadata>
   <store class="dataStore">
     <id>DataStoreInfoImpl--3ba9aafb:17111295e5d:-7ffd</id>
   </store>

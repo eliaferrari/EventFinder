@@ -37,39 +37,11 @@ function reset() {
   document.getElementById("form1").reset()
 }
 
-// Set vectorTileOptions
-var vectorTileOptions = {
-vectorTileLayerStyles: {
-'events': function() {
-return {
-  color: 'red',
-  opacity: 1,
-  fillColor: 'yellow',
-  fill: true,
-}
-},
-},
-interactive: true,	// Make sure that this VectorGrid fires mouse/pointer events
-}
 
-// Set the coordinate system
-var projection_epsg_no = '2056';
-// Set the variable for storing the workspace:layername
-var campground_geoserverlayer = 'eventfinder:events';
-// Creating the full vectorTile url
-var campingURL = '/geoserver/gwc/service/tms/1.0.0/' + campground_geoserverlayer + '@EPSG%3A' + projection_epsg_no + '@pbf/{z}/{x}/{-y}.pbf';
-// Creating the Leaflet vectorGrid object
-var camping_vectorgrid = L.vectorGrid.protobuf(campingURL, vectorTileOptions)
-
-// Define the action taken once a polygon is clicked. In this case we will create a popup with the camping name
-camping_vectorgrid.on('click', function(e) {
-    L.popup()
-      .setContent(e.layer.properties.naamnl)
-      .setLatLng(e.latlng)
-      .openOn(map);
-  })
-  .addTo(map);
-
-// Add the vectorGrid to the map
-camping_vectorgrid.addTo(map);
-
+//MAP GEOSERVER
+var wmsLayer= L.tileLayer.wms("http://localhost:8080/geoserver/gwc/service/wms", {
+    layers: 'eventfinder:events',
+    format: 'image/png',
+    transparent: true
+});
+map.addLayer(wmsLayer);
