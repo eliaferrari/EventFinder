@@ -4,8 +4,12 @@
   <inMemoryCached>true</inMemoryCached>
   <name>eventfinder:events</name>
   <mimeFormats>
+    <string>application/vnd.mapbox-vector-tile</string>
+    <string>application/json;type=utfgrid</string>
     <string>image/png</string>
     <string>image/jpeg</string>
+    <string>application/json;type=geojson</string>
+    <string>application/json;type=topojson</string>
   </mimeFormats>
   <gridSubsets>
     <gridSubset>
