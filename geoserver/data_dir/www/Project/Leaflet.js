@@ -39,7 +39,7 @@ function reset() {
 
 
 //MAP GEOSERVER
-var wmsLayer= L.tileLayer.wms("http://localhost:8080/geoserver/gwc/service/wms", {
+var wmsLayer= L.tileLayer.wms("http://localhost:8080/geoserver/gwc/service/z", {
     layers: 'eventfinder:events',
     format: 'image/png',
     transparent: true
