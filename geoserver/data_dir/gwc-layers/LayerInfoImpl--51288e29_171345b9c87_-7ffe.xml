@@ -8,6 +8,7 @@
     <string>image/png</string>
     <string>image/jpeg</string>
     <string>application/json;type=geojson</string>
+    <string>application/json;type=topojson</string>
   </mimeFormats>
   <gridSubsets>
     <gridSubset>
