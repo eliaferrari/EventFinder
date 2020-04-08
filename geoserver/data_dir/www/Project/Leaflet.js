@@ -2,7 +2,7 @@ var map = L.map('map').setView([46.9, 8.1], 8);
 
 var original =
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-  maxZoom: 10,
+  maxZoom: 18,
   attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
     '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
     'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -62,6 +62,10 @@ var defaultParameters = {
 var parameters = L.Util.extend(defaultParameters);
 var URL = owsrootUrl + L.Util.getParamString(parameters);
 
+var link = $('<a href="#" class="speciallink">TestLink</a>').click(function() {
+    alert("test");
+})[0];
+
 var WFSLayer = null;
 var ajax = $.ajax({
     url : URL,
@@ -81,7 +85,7 @@ var ajax = $.ajax({
                 layer.bindPopup(feature.properties.name + "<br> " +
                 feature.properties.datum + "<br><br> " +
                 feature.properties.catname + " | " +feature.properties.subcatname + "<br> " +
-                feature.properties.website  + "<br><br> " +
+                "<a href='feature.properties.catname'> feature.properties.catname </a><br/>"  + "<br><br> " +
                 feature.properties.beschreibung,popupOptions);
             }
         }).addTo(map);
