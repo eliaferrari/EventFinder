@@ -65,7 +65,7 @@ var URL = owsrootUrl + L.Util.getParamString(parameters);
 var WFSLayer = null;
 var ajax = $.ajax({
     url : URL,
-    dataType : 'json',
+    dataType : 'jsonp',
     jsonpCallback : 'getJson',
     success : function (response) {
         WFSLayer = L.geoJson(response, {
@@ -77,9 +77,12 @@ var ajax = $.ajax({
                 };
             },
             onEachFeature: function (feature, layer) {
-                popupOptions = {maxWidth: 200};
-                layer.bindPopup("Popup text, access attributes with feature.properties.ATTRIBUTE_NAME"
-                    ,popupOptions);
+                popupOptions = {maxWidth: 300};
+                layer.bindPopup(feature.properties.name + "<br> " +
+                feature.properties.datum + "<br><br> " +
+                feature.properties.catname + " | " +feature.properties.subcatname + "<br> " +
+                feature.properties.website  + "<br><br> " +
+                feature.properties.beschreibung,popupOptions);
             }
         }).addTo(map);
     }
