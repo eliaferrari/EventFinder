@@ -7,12 +7,13 @@
 
 
   <meta charset="utf-8">
+
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="">
 
-  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
-  <!--Load vectorGrid plugin for Leaflet -->
-<script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+
 
   <style>
   </style>
@@ -25,28 +26,28 @@
   <form id="form1">
     <div class="title2"> Select your options: </div>
     <label for="Type" class="form_label">Event Type:</label>
-      <select id="Type" class="form_text" required>
-        <option>Concerts</option>
-        <option>Conference</option>
-        <option>Theater</option>
-        <option>Musical</option>
-      </select>
-      <br><br>
-      <label for="date" class="form_label"> Event date: </label>
-      <input type="date" id="date" name="date" class="form_text" required>
-      <br><br>
-      <label for="location" class="form_label" class="form_text"> Location: </label>
-      <input type="text"  value="" class="form_text" id="myLocation" required>
-      <input type="button" onclick="getLocation()" value="Your location" id="location" class="form_text">
-      <br><br>
-      <label for="Type" class="form_label">Im welchem Unkreis:</label>
-        <select id="Type" class="form_text" required>
-          <option>10km</option>
-          <option>20km</option>
-          <option>50km</option>
-          <option>100km</option>
-          <option>keine Einschränkung</option>
-        </select>
+    <select id="Type" class="form_text" required>
+      <option>Concerts</option>
+      <option>Conference</option>
+      <option>Theater</option>
+      <option>Musical</option>
+    </select>
+    <br><br>
+    <label for="date" class="form_label"> Event date: </label>
+    <input type="date" id="date" name="date" class="form_text" required>
+    <br><br>
+    <label for="location" class="form_label" class="form_text"> Location: </label>
+    <input type="text" value="" class="form_text" id="myLocation" required>
+    <input type="button" onclick="getLocation()" value="Your location" id="location" class="form_text">
+    <br><br>
+    <label for="Type" class="form_label">Im welchem Unkreis:</label>
+    <select id="Type" class="form_text" required>
+      <option>10km</option>
+      <option>20km</option>
+      <option>50km</option>
+      <option>100km</option>
+      <option>keine Einschränkung</option>
+    </select>
 
     <br><br>
     <input type="submit" onclick="submit()" value="Confirm">
@@ -59,15 +60,17 @@
   <div class="containertext">
     <div> Optimierung der Veranstaltungsangebot anhand von persönlichen
       Interessen und Geolocation. </div>
-    </div>
-    <div class="containerbottom">
-      <div class="bottomleft">Projektarbeit Geoinformatik</div>
-      <div class="bottomcenter">Mai 2020</div>
-      <div class="bottomright">Enea Gentilini, Philipp Brunner; Elia Ferrari</div>
-
-    </div>
   </div>
-      <script src="leaflet.js"></script>
+  <div class="containerbottom">
+    <div class="bottomleft">Projektarbeit Geoinformatik</div>
+    <div class="bottomcenter">Mai 2020</div>
+    <div class="bottomright">Enea Gentilini, Philipp Brunner; Elia Ferrari</div>
+
+  </div>
+</div>
+
+<script src="leaflet.js"></script>
+
 
 
 </body>

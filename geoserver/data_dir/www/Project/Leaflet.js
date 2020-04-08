@@ -44,4 +44,46 @@ var wmsLayer= L.tileLayer.wms("http://localhost:8080/geoserver/gwc/service/z", {
     format: 'image/png',
     transparent: true
 });
-map.addLayer(wmsLayer);
+//map.addLayer(wmsLayer);
+
+//var geojsonLayer = new L.GeoJSON.AJAX("http://localhost:8080/geoserver/eventfinder/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=eventfinder%3Aevents&maxFeatures=50&outputFormat=application%2Fjson");
+
+var owsrootUrl = 'http://localhost:8080/geoserver/eventfinder/ows';
+var defaultParameters = {
+    service : 'WFS',
+    version : '2.0',
+    request : 'GetFeature',
+    typeName : 'eventfinder:events',
+    outputFormat : 'text/javascript',
+    format_options : 'callback:getJson',
+    SrsName : 'EPSG:4326'
+};
+
+var parameters = L.Util.extend(defaultParameters);
+var URL = owsrootUrl + L.Util.getParamString(parameters);
+
+var WFSLayer = null;
+var ajax = $.ajax({
+    url : URL,
+    dataType : 'jsonp',
+    jsonpCallback : 'getJson',
+    success : function (response) {
+        WFSLayer = L.geoJson(response, {
+            style: function (feature) {
+                return {
+                    stroke: false,
+                    fillColor: 'FFFFFF',
+                    fillOpacity: 0
+                };
+            },
+            onEachFeature: function (feature, layer) {
+                popupOptions = {maxWidth: 300};
+                layer.bindPopup(feature.properties.name + "<br> " +
+                feature.properties.datum + "<br><br> " +
+                feature.properties.catname + " | " +feature.properties.subcatname + "<br> " +
+                feature.properties.website  + "<br><br> " +
+                feature.properties.beschreibung,popupOptions);
+            }
+        }).addTo(map);
+    }
+});
