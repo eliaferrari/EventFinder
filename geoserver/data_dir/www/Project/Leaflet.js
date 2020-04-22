@@ -9,17 +9,6 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
   id: 'mapbox.streets'
 }).addTo(map);
 
-
-//MAP GEOSERVER
-var wmsLayer= L.tileLayer.wms("http://localhost:8080/geoserver/gwc/service/wms", {
-    layers: 'eventfinder:events',
-    format: 'image/png',
-    transparent: true
-});
-//map.addLayer(wmsLayer);
-
-//var geojsonLayer = new L.GeoJSON.AJAX("http://localhost:8080/geoserver/eventfinder/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=eventfinder%3Aevents&maxFeatures=50&outputFormat=application%2Fjson");
-
 var owsrootUrl = 'http://localhost:8080/geoserver/eventfinder/ows';
 var defaultParameters = {
     service : 'WFS',
