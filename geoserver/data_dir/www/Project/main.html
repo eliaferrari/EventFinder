@@ -12,9 +12,9 @@
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
-<script src="form.js"></script>
 
-<script src="table.js"></script>
+
+
   <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
 
 
@@ -56,6 +56,8 @@
     <input type="submit" onclick="submit()" value="Confirm">
     <input type="button" onclick="reset()" value="Reset">
   </form>
+
+  <script src="form.js"></script>
 <div class="container-map" >
   <div id="map" class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
   </div>
@@ -64,13 +66,20 @@
   Can you find something interesting...
 
   <table id="event" border='1'>
-    <tr>
+    <thead>
+      <tr>
         <th>Date</th>
          <th>Event</th>
          <th>Place</th>
-    </tr>
+       </tr>
+    </thead>
+    <tbody>
+      <tr>
+      </tr>
+    </tbody>
 </table>
 
+<script type = "application/javascript" src="table.js" ></script>
 </div>
 </div>
 
