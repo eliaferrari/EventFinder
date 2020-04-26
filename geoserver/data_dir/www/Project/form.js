@@ -48,6 +48,24 @@ var defaultParameters = {
     outputFormat : 'text/javascript',
     format_options : 'callback:getJson'
 };
+
+
+//http://localhost:8080/geoserver/wfs?service=wfs&version=2.0&request=GetFeature&typeNames=eventfinder:events&cql_filter=catname='concert'
+//Funcion filter by event type
+var eventtype = document.getElementById("Event Type??????");
+var owsrootUrl = 'http://localhost:8080/geoserver/eventfinder/ows';
+var defaultParameters = {
+    service : 'WFS',
+    version : '2.0',
+    request : 'GetFeature',
+    typeNames : 'eventfinder:events',
+    cql_filter : 'catname=eventtype', // dev'essere come testo
+    outputFormat : 'text/javascript',
+    format_options : 'callback:getJson',
+    srsName : 'EPSG:4326'
+};
+
+//Funcion for the server request
 var parameters = L.Util.extend(defaultParameters);
 var URL = owsrootUrl + L.Util.getParamString(parameters);
 
