@@ -65,6 +65,21 @@ var defaultParameters = {
     srsName : 'EPSG:4326'
 };
 
+//http://localhost:8080/geoserver/wfs?service=wfs&version=2.0&request=GetFeature&typeNames=eventfinder:events&cql_filter=datum>'2020-08-30 00:00:00'
+//Funcion filter by date (just future events)
+var date = document.getElementById("date");// formato da verificare (yyyy-mm-dd hh-mm-ss)
+var owsrootUrl = 'http://localhost:8080/geoserver/eventfinder/ows';
+var defaultParameters = {
+    service : 'WFS',
+    version : '2.0',
+    request : 'GetFeature',
+    typeNames : 'eventfinder:events',// between (&cql_filter=datum BETWEEN '2020-08-01 00:00:00'AND'2020-08-15 00:00:00')
+    cql_filter : 'datum>date',//
+    outputFormat : 'text/javascript',
+    format_options : 'callback:getJson',
+    srsName : 'EPSG:4326'
+};
+
 //Funcion for the server request
 var parameters = L.Util.extend(defaultParameters);
 var URL = owsrootUrl + L.Util.getParamString(parameters);
