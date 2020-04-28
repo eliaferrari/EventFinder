@@ -19,25 +19,16 @@ function showPosition(position) {
 
 }
 
-
-//Function Form
-function submit() {
-  document.getElementById("form1").submit();
-}
-function reset() {
-  document.getElementById("form1").reset()
-}
-
+var owsrootUrl = 'http://localhost:8080/geoserver/eventfinder/ows';
 //Bbox solo quadrata quindi dal cerchio devo calcolare area equivalente
 //L=sqrt( r^2 * pi) --> L/2 in direzione x e y --> basso sinistra, alto a destra
 //Funcion BBOX request
-var radius = document.getElementById("UNKREIS?????");
-var y1 = position.coords.longitude - (Math.sqrt(radius*radius*Math.PI)/2);
-var y2 = position.coords.longitude + (Math.sqrt(radius*radius*Math.PI)/2);
-var x1 = position.coords.latitude - (Math.sqrt(radius*radius*Math.PI)/2);
-var x2 = position.coords.latitude + (Math.sqrt(radius*radius*Math.PI)/2);
+var radius = document.getElementById("umkreis");
+var y1 = position.coords.longitude - (Math.sqrt(Number(radius)*Number(radius)*Math.PI)/2);
+var y2 = position.coords.longitude + (Math.sqrt(Number(radius)*Number(radius)*Math.PI)/2);
+var x1 = position.coords.latitude - (Math.sqrt(Number(radius)*Number(radius)*Math.PI)/2);
+var x2 = position.coords.latitude + (Math.sqrt(Number(radius)*Number(radius)*Math.PI)/2);
 
-var owsrootUrl = 'http://localhost:8080/geoserver/eventfinder/ows';
 var defaultParameters = {
     service : 'WFS',
     version : '2.0',
@@ -52,14 +43,13 @@ var defaultParameters = {
 
 //http://localhost:8080/geoserver/wfs?service=wfs&version=2.0&request=GetFeature&typeNames=eventfinder:events&cql_filter=catname='concert'
 //Funcion filter by event type
-var eventtype = document.getElementById("Event Type??????");
-var owsrootUrl = 'http://localhost:8080/geoserver/eventfinder/ows';
+var eventtype = document.getElementById("eventtype");
 var defaultParameters = {
     service : 'WFS',
     version : '2.0',
     request : 'GetFeature',
     typeNames : 'eventfinder:events',
-    cql_filter : 'catname=eventtype', // dev'essere come testo
+    cql_filter : 'catname=eventtype',
     outputFormat : 'text/javascript',
     format_options : 'callback:getJson',
     srsName : 'EPSG:4326'
@@ -68,7 +58,6 @@ var defaultParameters = {
 //http://localhost:8080/geoserver/wfs?service=wfs&version=2.0&request=GetFeature&typeNames=eventfinder:events&cql_filter=datum>'2020-08-30 00:00:00'
 //Funcion filter by date (just future events)
 var date = document.getElementById("date");// formato da verificare (yyyy-mm-dd hh-mm-ss)
-var owsrootUrl = 'http://localhost:8080/geoserver/eventfinder/ows';
 var defaultParameters = {
     service : 'WFS',
     version : '2.0',
@@ -109,3 +98,11 @@ var ajax = $.ajax({
         }).addTo(map);
     }
 });
+
+//Function Form
+function submit() {
+  document.getElementById("form1").submit();
+}
+function reset() {
+  document.getElementById("form1").reset()
+}

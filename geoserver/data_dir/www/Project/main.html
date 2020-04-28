@@ -27,8 +27,8 @@
 
   <form id="form1">
     <div class="title2"> Select your options: </div>
-    <label for="Type" class="form_label">Event Type:</label>
-    <select id="Type" class="form_text" required>
+    <label for="eventtype" class="form_label">Event Type:</label>
+    <select id="eventtype" class="form_text" required>
       <option>Concert</option>
       <option>Sport</option>
       <option>Culture</option>
@@ -48,13 +48,12 @@
     <input type="text" value="" class="form_text" id="myLocation" required>
     <input type="button" onclick="getLocation()" value="Your location" id="location" class="form_text">
     <br><br>
-    <label for="Type" class="form_label">Im welchem Unkreis:</label>
-    <select id="Type" class="form_text" required>
-      <option>10km</option>
-      <option>20km</option>
-      <option>50km</option>
-      <option>100km</option>
-      <option>keine Einschränkung</option>
+    <label for="umkreis" class="form_label">Im welchem Umkreis in km:</label>
+    <select id="umkreis" class="form_text" required>
+      <option>10</option>
+      <option>20</option>
+      <option>50</option>
+      <option>100</option>
     </select>
 
     <br><br>
