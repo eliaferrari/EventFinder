@@ -9,23 +9,38 @@ var defaultParameters = {
     SrsName : 'EPSG:4326'
 };
 
-var eventContainer = document.getElementById("event");
-
 var parameters = L.Util.extend(defaultParameters);
 var URL = owsrootUrl + L.Util.getParamString(parameters);
 
-var ourRequest = new XMLHttpRequest();
-ourRequest.open('GET', URL);
+var WFSLayer = null;
+var ajax = $.ajax({
+    url : URL,
+    dataType : 'jsonp',
+    jsonpCallback : 'getJson',
+    success : function (response) {
+        WFSLayer = L.geoJson(response, {
+            style: function (feature) {
+                return {
+                    stroke: false,
+                    fillColor: 'FFFFFF',
+                    fillOpacity: 0
+                };
+            },
+            onEachFeature: function (feature, layer) {
+              $(document).ready(function()
+              {
 
-ourRequest.onload = function(){
-  var ourData = JSON.parse(ourRequest.responseText);
-  renderHTML(ourData);
-};
-ourRequest.send();
+                  var data =JSON.parse(feature);
+                  var ul = document.getElementById("event");
+                  for( var i = 0; i < response.length; i++ )
+                  {
+                    var o = response[i];
+                    var li = document.createElement("li");
+                    li.appendChild(document.createTextNode(o.catname));
+                    ul.appendChild(li);
+            }
+        })
 
-
-function renderHTML(data) {
-  var HTMLstirng = "test"
-  eventContainer.insertAdjacentHTML('beforeend', HTMLstirng)
 
 }
+})}})
