@@ -31,7 +31,8 @@ var stringa = x1.toString().concat(comma,y1.toString(),comma,x2.toString(),comma
 //filter by event type
 var eventtype = document.getElementById("eventtype");
 //filter by date (future events)
-var date = document.getElementById("eventdate");// formato da verificare, deve essere: (yyyy-mm-dd hh:mm:ss)
+var eventdate = document.getElementById("eventdate");// formato da verificare, deve essere: (yyyy-mm-dd hh:mm:ss)
+var exampledate = '2020-08-15 00:00:00'
 var defaultParameters = {
     service : 'WFS',
     version : '2.0',
@@ -39,7 +40,7 @@ var defaultParameters = {
     typeNames : 'eventfinder:events',
     srsName : 'EPSG:4326',
     bbox : stringa,
-    cql_filter : "catname="+"'"+eventtype+"'"+" AND datum>"+"'"+date+"'",// between (&cql_filter=datum BETWEEN '2020-08-01 00:00:00'AND'2020-08-15 00:00:00')
+    cql_filter : "catname="+"'"+eventtype+"'"+" AND datum>"+"'"+eventdate+"'",// between (&cql_filter=datum BETWEEN '2020-08-01 00:00:00'AND'2020-08-15 00:00:00')
     outputFormat : 'text/javascript',
     format_options : 'callback:getJson'
 };
