@@ -30,7 +30,7 @@ var x2 = position.coords.latitude + (Math.sqrt(Number(radius)*Number(radius)*Mat
 //filter by event type
 var eventtype = document.getElementById("eventtype");
 //filter by date (future events)
-var date = document.getElementById("date");// formato da verificare (yyyy-mm-dd hh:mm:ss)
+var date = document.getElementById("eventdate");// formato da verificare (yyyy-mm-dd hh:mm:ss)
 
 var defaultParameters = {
     service : 'WFS',
@@ -44,7 +44,7 @@ var defaultParameters = {
     format_options : 'callback:getJson'
 };
 
-//http://localhost:8080/geoserver/wfs?service=wfs&version=2.0&request=GetFeature&typeNames=eventfinder:events&cql_filter=catname='concert'
+//http://localhost:8080/geoserver/eventfinder/ows?service=WFS&version=2.0&request=GetFeature&typeName=eventfinder:events&outputFormat=text/javascript&cql_filter=catname=%27sport%27
 //http://localhost:8080/geoserver/wfs?service=wfs&version=2.0&request=GetFeature&typeNames=eventfinder:events&cql_filter=datum>'2020-08-30 00:00:00'
 
 //Funcion for the server request
