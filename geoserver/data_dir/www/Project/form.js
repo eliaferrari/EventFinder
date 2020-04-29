@@ -20,31 +20,32 @@ function showPosition(position) {
 }
 
 var owsrootUrl = 'http://localhost:8080/geoserver/eventfinder/ows';
-//L=sqrt( r^2 * pi) --> L/2 in direzione x e y --> basso sinistra, alto a destra (46.9627468;7.4497108)
 //BBOX
-var radius = document.getElementById("umkreis");
-var y1 = position.coords.longitude - (Math.sqrt(Number(radius)*Number(radius)*Math.PI)/2);
-var y2 = position.coords.longitude + (Math.sqrt(Number(radius)*Number(radius)*Math.PI)/2);
-var x1 = position.coords.latitude - (Math.sqrt(Number(radius)*Number(radius)*Math.PI)/2);
-var x2 = position.coords.latitude + (Math.sqrt(Number(radius)*Number(radius)*Math.PI)/2);
+var radius = (Number(document.getElementById("umkreis"))/100);
+var y1 = position.coords.longitude - (Math.sqrt(radius*radius*Math.PI)/2);
+var y2 = position.coords.longitude + (Math.sqrt(radius*radius*Math.PI)/2);
+var x1 = position.coords.latitude - (Math.sqrt(radius*radius*Math.PI)/2);
+var x2 = position.coords.latitude + (Math.sqrt(radius*radius*Math.PI)/2);
+var comma = ','
+var stringa = x1.toString().concat(comma,y1.toString(),comma,x2.toString(),comma,y2.toString());
 //filter by event type
 var eventtype = document.getElementById("eventtype");
 //filter by date (future events)
-var date = document.getElementById("eventdate");// formato da verificare (yyyy-mm-dd hh:mm:ss)
-
+var date = document.getElementById("eventdate");// formato da verificare, deve essere: (yyyy-mm-dd hh:mm:ss)
 var defaultParameters = {
     service : 'WFS',
     version : '2.0',
     request : 'GetFeature',
     typeNames : 'eventfinder:events',
     srsName : 'EPSG:4326',
-    Bbox : 'x1,y1,x2,y2',//lon,lat must be a number!!
-    cql_filter : 'catname=eventtype AND datum>date',// between (&cql_filter=datum BETWEEN '2020-08-01 00:00:00'AND'2020-08-15 00:00:00')
+    bbox : stringa,
+    cql_filter : "catname="+"'"+eventtype+"'"+" AND datum>"+"'"+date+"'",// between (&cql_filter=datum BETWEEN '2020-08-01 00:00:00'AND'2020-08-15 00:00:00')
     outputFormat : 'text/javascript',
     format_options : 'callback:getJson'
 };
 
 //http://localhost:8080/geoserver/eventfinder/ows?service=WFS&version=2.0&request=GetFeature&typeName=eventfinder:events&outputFormat=text/javascript&cql_filter=catname=%27sport%27
+//http://localhost:8080/geoserver/eventfinder/ows?service=WFS&version=2.0&request=GetFeature&typeName=eventfinder:events&outputFormat=text/javascript&srsName=EPSG:4326&cql_filter=catname=%27sport%27
 //http://localhost:8080/geoserver/wfs?service=wfs&version=2.0&request=GetFeature&typeNames=eventfinder:events&cql_filter=datum>'2020-08-30 00:00:00'
 
 //Funcion for the server request
