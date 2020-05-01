@@ -9,6 +9,25 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
   id: 'mapbox.streets'
 }).addTo(map);
 
+var WFSLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+  maxZoom: 15,
+  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+    '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+  id: 'mapbox.streets'
+}).addTo(map);
+
+var greenIcon = new L.Icon({
+  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+
+
 //Geolocation
 var pos = 0
 var x = document.getElementById("myLocation");
@@ -24,6 +43,7 @@ function getLocation() {
 //elaborate the content of the location form tab
 var test = "Insert CAP or city";
 document.getElementById("myLocation").value = test;
+
 function showPosition(position) {
   pos = position;
   document.getElementById("myLocation").value = position.coords.latitude + ";"+ position.coords.longitude;
@@ -32,14 +52,6 @@ function showPosition(position) {
 }
 function geolocation(){
 
-  var original =
-  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-    maxZoom: 15,
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-      '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-      'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    id: 'mapbox.streets'
-  }).addTo(map);
 var owsrootUrl = 'http://localhost:8080/geoserver/eventfinder/ows';
 //BBOX
 var radius = ((document.getElementById("umkreis").value)/100);
@@ -49,7 +61,6 @@ var x1 = pos.coords.latitude - (Math.sqrt(radius*radius*Math.PI)/2);
 var x2 = pos.coords.latitude + (Math.sqrt(radius*radius*Math.PI)/2);
 var comma = ','
 var stringa = y1.toString().concat(comma,x1.toString(),comma,y2.toString(),comma,x2.toString());
-console.log(stringa);
 //filter by event type
 var eventtype = document.getElementById("eventtype").value;
 //filter by date (future events)
@@ -74,7 +85,6 @@ var defaultParameters = {
 var parameters = L.Util.extend(defaultParameters);
 var URL = owsrootUrl + L.Util.getParamString(parameters);
 console.log(URL)
-var WFSLayer = null;
 var ajax = $.ajax({
     url : URL,
     dataType : 'jsonp',
@@ -83,9 +93,7 @@ var ajax = $.ajax({
         WFSLayer = L.geoJson(response, {
             style: function (feature) {//in leaflet.js already defined
                 return {
-                    stroke: false,
-                    fillColor: 'FFFFFF',
-                    fillOpacity: 0
+                  icon : greenIcon,
                 };
 
             },
@@ -114,7 +122,7 @@ var ajax = $.ajax({
 //Function Form
 function confirm() {
   map.eachLayer(function (layer) {
-      map.removeLayer(layer);
+      map.removeLayer(WFSLayer);
   });
   geolocation();
 };

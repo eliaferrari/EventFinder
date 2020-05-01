@@ -86,15 +86,7 @@ form {
   opacity: 1.0;
 }
 
-#map {
-  width: 60%;
-  height: 700px;
-  float: left;
-  border: solid ;
-  border-width: 1px;
-  border-color: black;
-  opacity: 1.0;
-}
+
 
 .table {
   left: 1%;
@@ -158,8 +150,14 @@ form {
   color: white;
 }
 
-map {
-  width: 80%;
-  height: auto;
-  opacity: 0.3;
+
+#map {
+  width: 60%;
+  height: 700px;
+  float: left;
+  border: solid ;
+  border-width: 1px;
+  border-color: black;
+  opacity: 1.0;
+  background-color: var(--darkgrey);
 }
