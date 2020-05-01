@@ -26,22 +26,32 @@ var greenIcon = new L.Icon({
   shadowSize: [41, 41]
 });
 
-
+// ------------------------------------------------------------------------------------
 
 //Geolocation
-var pos = 0
-var x = document.getElementById("myLocation");
-
 function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
+    var x = document.getElementById("myLocation").value;
+    var URL1 = 'http://api.geonames.org/findNearbyPostalCodesJSON?postalcode='+x+'&country=CH&radius=10&maxRows=1&username=elia';
+    alert(URL1)
+    var ajax1 = $.ajax({
+        url : URL1,
+        dataType : 'json',
+        format_options : 'callback:getJson',
+        success : function (response) {
+            for(var property in response) {
+                var PostalCodes = response[property];
+            for(var prop in PostalCodes){
+                var zero = PostalCodes[prop];
+                var lat = zero['lat']
+                var lon = zero['lng']
+                alert(lat +"-" + lon)
+            }}}
+    });
 }
+//--------------------------------------------------------------------------------------
 
 //elaborate the content of the location form tab
-var test = "Insert CAP or city";
+var test = "Insert postal code";
 document.getElementById("myLocation").value = test;
 
 function showPosition(position) {
@@ -63,7 +73,7 @@ var comma = ','
 var stringa = y1.toString().concat(comma,x1.toString(),comma,y2.toString(),comma,x2.toString());
 //filter by event type
 var eventtype = document.getElementById("eventtype").value;
-//filter by date (future events)
+//filter by date (fut   ure events)
 var eventdate = document.getElementById("eventdate").value.concat(" 00:00:01");// formato da verificare, deve essere: (yyyy-mm-dd hh:mm:ss)
 
 var defaultParameters = {
@@ -83,22 +93,21 @@ var defaultParameters = {
 //http://api.geonames.org/findNearbyPostalCodesJSON?postalcode=3014&country=CH&radius=10&maxRows=1&username=elia
 
 //Funcion for the server request
-var parameters = L.Util.extend(defaultParameters);
-var URL = owsrootUrl + L.Util.getParamString(parameters);
+var URL = 'http://api.geonames.org/findNearbyPostalCodesJSON?postalcode='+test+'&country=CH&radius=10&maxRows=1&username=elia';
 console.log(URL)
 var ajax = $.ajax({
     url : URL,
     dataType : 'jsonp',
     jsonpCallback : 'getJson',
-    success : function (response) {
+    success : function (response) {//in leaflet.js already defined
         WFSLayer = L.geoJson(response, {
-            style: function (feature) {
+            style: function (feature) {//in leaflet.js already defined
                 return {
                   icon : greenIcon,
                 };
 
             },
-            onEachFeature: function (feature, layer) {
+            onEachFeature: function (feature, layer) {//in leaflet.js already defined
                 popupOptions = {maxWidth: 300};
                 layer.bindPopup(feature.properties.name + "<br> " +
                 feature.properties.datum + "<br><br> " +

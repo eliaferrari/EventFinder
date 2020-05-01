@@ -1,0 +1,113 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="stylesheet.css">
+  <title>Projektarbeit Geoinformatik</title>
+
+
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="">
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+
+
+
+  <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+
+
+  <style>
+  </style>
+
+</head>
+
+<body>
+  <div class="title">Veranstaltungen in der Schweiz</div>
+
+  <form id="form1">
+    <div class="title2"> Select your options: </div>
+    <label for="eventtype" class="form_label">Event Type:</label>
+    <select id="eventtype" class="form_text" required>
+      <option>concert</option>
+      <option>sport</option>
+      <option>culture</option>
+      <option>festivals_Parades</option>
+      <option>movies</option>
+      <option>art</option>
+      <option>technology</option>
+      <option>politics_activism</option>
+
+
+    </select>
+    <br><br>
+    <label for="eventdate" class="form_label"> Event date: </label>
+    <input type="date" id="eventdate" name="date" class="form_text" required>
+    <br><br>
+    <label for="location" class="form_label" class="form_text"> Location: </label>
+    <input type="text" value="" class="form_text" id="myLocation" required>
+    <input type="button" onclick="getLocation()" value="Your location" id="location" class="form_text">
+    <br><br>
+    <label for="umkreis" class="form_label">Im welchem Umkreis in km:</label>
+    <select id="umkreis" class="form_text" required>
+      <option>10</option>
+      <option>20</option>
+      <option>50</option>
+      <option>100</option>
+    </select>
+
+    <br><br>
+    <input type="button" onclick="confirm()" value="Confirm">
+    <input type="button" onclick="clean()" value="Reset">
+  </form>
+
+
+
+
+  <div class="container-map">
+    <div id="map" class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
+    </div>
+    <div class="table">
+
+    <script type="text/javascript" src="geocode.js"></script>
+      Can you find something interesting...
+
+      <table id="event" border='1'>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Event</th>
+            <th>Place</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+          </tr>
+        </tbody>
+      </table>
+
+  <script type="text/javascript" src="table.js"></script>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="leaflet.js"></script>
+  <div class="containertext">
+    <div> Optimierung der Veranstaltungsangebot anhand von persönlichen
+      Interessen und Geolocation. </div>
+  </div>
+  <div class="containerbottom">
+    <div class="bottomleft">Projektarbeit Geoinformatik</div>
+    <div class="bottomcenter">Mai 2020</div>
+    <div class="bottomright">Enea Gentilini, Philipp Brunner; Elia Ferrari</div>
+
+  </div>
+  </div>
+
+
+
+
+
+</body>
+
+
+</html>
