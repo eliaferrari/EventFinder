@@ -91,6 +91,7 @@ var defaultParameters = {
 //http://localhost:8080/geoserver/eventfinder/ows?service=WFS&version=2.0&request=GetFeature&typeName=eventfinder:events&outputFormat=text/javascript&srsName=EPSG:4326&cql_filter=catname=%27sport%27
 //http://localhost:8080/geoserver/wfs?service=wfs&version=2.0&request=GetFeature&typeNames=eventfinder:events&cql_filter=datum>'2020-08-30 00:00:00'
 //http://api.geonames.org/findNearbyPostalCodesJSON?postalcode=3014&country=CH&radius=10&maxRows=1&username=elia
+//http://localhost:8080/geoserver/eventfinder/ows?service=WFS&version=2.0&request=GetFeature&typeName=eventfinder:events&outputFormat=text/javascript&srsName=EPSG:4326&cql_filter=catname=%27concert%27%20AND%20datum%3E%272020-06-01%2000:00:00%27%20AND%20bbox(geom,45.6,7.7,47.6,8.7)
 
 //Funcion for the server request
 var URL = 'http://api.geonames.org/findNearbyPostalCodesJSON?postalcode='+test+'&country=CH&radius=10&maxRows=1&username=elia';

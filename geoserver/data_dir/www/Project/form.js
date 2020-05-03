@@ -30,6 +30,8 @@ var greenIcon = new L.Icon({
 
 //Geolocation
 var pos = 0
+var lat;
+var lon;
 var x = document.getElementById("myLocation");
 
 function getLocation() {
@@ -46,7 +48,9 @@ document.getElementById("myLocation").value = test;
 
 function showPosition(position) {
   pos = position;
-  document.getElementById("myLocation").value = position.coords.latitude + ";"+ position.coords.longitude;
+  lat = position.coords.latitude
+  lon = position.coords.longitude
+  document.getElementById("myLocation").value = lat + ";"+ lon;
 
 
 }
@@ -55,10 +59,10 @@ function geolocation(){
 var owsrootUrl = 'http://localhost:8080/geoserver/eventfinder/ows';
 //BBOX
 var radius = ((document.getElementById("umkreis").value)/100);
-var y1 = pos.coords.longitude - (Math.sqrt(radius*radius*Math.PI)/2);
-var y2 = pos.coords.longitude + (Math.sqrt(radius*radius*Math.PI)/2);
-var x1 = pos.coords.latitude - (Math.sqrt(radius*radius*Math.PI)/2);
-var x2 = pos.coords.latitude + (Math.sqrt(radius*radius*Math.PI)/2);
+var y1 = lon - (Math.sqrt(radius*radius*Math.PI)/2);
+var y2 = lon + (Math.sqrt(radius*radius*Math.PI)/2);
+var x1 = lat - (Math.sqrt(radius*radius*Math.PI)/2);
+var x2 = lat + (Math.sqrt(radius*radius*Math.PI)/2);
 var comma = ','
 var stringa = x1.toString().concat(comma,y1.toString(),comma,x2.toString(),comma,y2.toString());
 //filter by event type
@@ -117,7 +121,7 @@ var ajax = $.ajax({
         else { zoom = 10}
 
 
-      map.flyTo([pos.coords.latitude, pos.coords.longitude], zoom);
+      map.flyTo([lat, lon], zoom);
     }
 });}
 
