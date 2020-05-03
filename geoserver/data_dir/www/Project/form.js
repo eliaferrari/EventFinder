@@ -60,7 +60,7 @@ var y2 = pos.coords.longitude + (Math.sqrt(radius*radius*Math.PI)/2);
 var x1 = pos.coords.latitude - (Math.sqrt(radius*radius*Math.PI)/2);
 var x2 = pos.coords.latitude + (Math.sqrt(radius*radius*Math.PI)/2);
 var comma = ','
-var stringa = y1.toString().concat('geom',comma,x1.toString(),comma,y2.toString(),comma,x2.toString());
+var stringa = x1.toString().concat(comma,y1.toString(),comma,x2.toString(),comma,y2.toString());
 //filter by event type
 var eventtype = document.getElementById("eventtype").value;
 //filter by date (future events)
@@ -74,7 +74,7 @@ var defaultParameters = {
     srsName : 'EPSG:4326',
     outputFormat : 'text/javascript',
     format_options : 'callback:getJson',
-    cql_filter : "catname="+"'"+eventtype+"'"+"AND datum>'"+eventdate+"' AND bbox("+stringa+")",// between (&cql_filter=datum BETWEEN '2020-08-01 00:00:00'AND'2020-08-15 00:00:00')
+    cql_filter : "catname="+"'"+eventtype+"'"+"AND datum>'"+eventdate+"' AND bbox(geom,"+stringa+")",// between (&cql_filter=datum BETWEEN '2020-08-01 00:00:00'AND'2020-08-15 00:00:00')
 };
 
 //http://localhost:8080/geoserver/eventfinder/ows?service=WFS&version=2.0&request=GetFeature&typeName=eventfinder:events&outputFormat=text/javascript&cql_filter=catname=%27sport%27
