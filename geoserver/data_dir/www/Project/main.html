@@ -25,6 +25,7 @@
 <body>
   <div class="title">Veranstaltungen in der Schweiz</div>
 
+<div class="container-head">
   <form id="form1">
     <div class="title2"> Select your options: </div>
     <label for="eventtype" class="form_label">Event Type:</label>
@@ -60,6 +61,12 @@
     <input type="button" onclick="confirm()" value="Confirm">
     <input type="button" onclick="clean()" value="Reset">
   </form>
+  <div class="instruction">
+    Are you looking for a gig around you?
+    Insert all the information about what you are looking for and we will propose
+    you a selection of the best upcoming events!
+  </div>
+</div>
 
 
 
@@ -69,10 +76,10 @@
     </div>
     <div class="table">
 
-    <script type="text/javascript" src="form.js"></script>
-      Can you find something interesting...
+    <script type="text/javascript" src="form.js"> </script>
+      <div class="title2"> Can you find something interesting... </div>
 
-      <table id="event" border='1'>
+      <table id="event" class="fixed_header">
         <thead>
           <tr>
             <th>Date</th>
@@ -91,10 +98,12 @@
   </div>
 
   <script type="text/javascript" src="leaflet.js"></script>
+
   <div class="containertext">
     <div> Optimierung der Veranstaltungsangebot anhand von persönlichen
       Interessen und Geolocation. </div>
   </div>
+
   <div class="containerbottom">
     <div class="bottomleft">Projektarbeit Geoinformatik</div>
     <div class="bottomcenter">Mai 2020</div>

@@ -91,6 +91,16 @@ var defaultParameters = {
 var parameters = L.Util.extend(defaultParameters);
 var URL = owsrootUrl + L.Util.getParamString(parameters);
 console.log(URL)
+
+var table = document.getElementById("event");
+var rowCount = table.rows.length;
+var row = table.insertRow(rowCount);
+var tableHeaderRowCount = 1;
+for (var i = tableHeaderRowCount; i < rowCount; i++) {
+    table.deleteRow(tableHeaderRowCount);
+  }
+
+
 var ajax = $.ajax({
     url : URL,
     dataType : 'jsonp',
@@ -110,6 +120,13 @@ var ajax = $.ajax({
                 feature.properties.catname + " | " +feature.properties.subcatname + "<br> " +
                 feature.properties.website  + "<br><br> " +
                 feature.properties.beschreibung,popupOptions);
+
+                var rowCount = table.rows.length;
+                var row = table.insertRow(rowCount);
+
+                row.insertCell(0).innerHTML= feature.properties.datum;
+                row.insertCell(1).innerHTML= feature.properties.name;
+                row.insertCell(2).innerHTML= feature.properties.catname;
             }
 
         }).addTo(map);
@@ -131,6 +148,8 @@ function confirm() {
       map.removeLayer(WFSLayer);
   });
   geolocation();
+
+
 };
 function clean() {
   document.getElementById("form1").reset();
