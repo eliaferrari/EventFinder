@@ -98,13 +98,10 @@ form {
   margin: 15px;
   height: 760px;
   background-color: var(--darkgrey);
-  opacity: 0.8;
+  opacity: 0.9;
   padding: 30px;
 }
 
-.container-map:hover {
-  opacity: 1.0;
-}
 
 #map {
   width: 60%;
@@ -117,12 +114,54 @@ form {
   background-color: var(--darkgrey);
 }
 
-.table {
+table {
   left: 1%;
   width: 39%;
   float: right;
   color: white;
+  font-family: 'Quicksand';
+  font-style: bold;
+  font-size: 13px;
 }
+
+th {
+    align: left;
+}
+
+tbody tr:hover{
+  background-color: black;
+}
+
+
+
+
+.fixed_header{
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 39%;
+}
+
+.fixed_header tbody{
+  display:block;
+  overflow: auto;
+  height: 600px;
+}
+
+.fixed_header thead tr {
+   display: block;
+}
+
+.fixed_header thead {
+  color:#fff;
+  width: inherit;
+
+}
+
+.fixed_header th, .fixed_header td, .fixed_header tr {
+  padding: 5px;
+  text-align: left;
+}
+
 
 
 .containertext {
