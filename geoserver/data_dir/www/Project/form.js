@@ -100,7 +100,8 @@ for (var i = tableHeaderRowCount; i < rowCount; i++) {
     table.deleteRow(tableHeaderRowCount);
   }
 
-
+var deltaLat;
+var deltaLon;
 var ajax = $.ajax({
     url : URL,
     dataType : 'jsonp',
@@ -115,6 +116,16 @@ var ajax = $.ajax({
             },
             onEachFeature: function (feature, layer) {
                 popupOptions = {maxWidth: 300};
+                var lat1 = (feature.geometry["coordinates"][1]);
+                var lon1 = (feature.geometry["coordinates"][0]);
+                deltaLon=lon-lon1;
+                deltaLat=lat-lat1;
+                var a = Math.pow(Math.sin(deltaLat/2), 2) + Math.cos(lat) * Math.cos(lat1) * Math.pow(Math.sin(deltaLon/2), 2);
+                var c = 2 * Math.asin(Math.sqrt(a));
+                var EARTH_RADIUS = 6371;
+                var dist = c * EARTH_RADIUS * 10; // dovrebbe essere in metri
+                console.log(dist);
+
                 layer.bindPopup(feature.properties.name + "<br> " +
                 feature.properties.datum + "<br><br> " +
                 feature.properties.catname + " | " +feature.properties.subcatname + "<br> " +
@@ -127,6 +138,7 @@ var ajax = $.ajax({
                 row.insertCell(0).innerHTML= feature.properties.datum;
                 row.insertCell(1).innerHTML= feature.properties.name;
                 row.insertCell(2).innerHTML= feature.properties.catname;
+                row.insertCell(3).innerHTML= dist // da arrotondare
             }
 
         }).addTo(map);
@@ -154,3 +166,6 @@ function confirm() {
 function clean() {
   document.getElementById("form1").reset();
 };
+
+
+//function getDistance(lat,lon,){}
