@@ -123,11 +123,11 @@ var ajax = $.ajax({
                 var a = Math.pow(Math.sin(deltaLat/2), 2) + Math.cos(lat) * Math.cos(lat1) * Math.pow(Math.sin(deltaLon/2), 2);
                 var c = 2 * Math.asin(Math.sqrt(a));
                 var EARTH_RADIUS = 6371;
-                var dist = c * EARTH_RADIUS * 10; // dovrebbe essere in metri
-                console.log(dist);
+                var dist = Math.ceil(c * EARTH_RADIUS * 10); // dovrebbe essere in metri
+                var date = new Date(feature.properties.datum);
 
                 layer.bindPopup(feature.properties.name + "<br> " +
-                feature.properties.datum + "<br><br> " +
+                date.getDate()+"."+date.getMonth()+"."+date.getFullYear() + "<br><br> " +
                 feature.properties.catname + " | " +feature.properties.subcatname + "<br> " +
                 feature.properties.website  + "<br><br> " +
                 feature.properties.beschreibung,popupOptions);
@@ -135,10 +135,10 @@ var ajax = $.ajax({
                 var rowCount = table.rows.length;
                 var row = table.insertRow(rowCount);
 
-                row.insertCell(0).innerHTML= feature.properties.datum;
+                row.insertCell(0).innerHTML= date.getDate()+"."+date.getMonth()+"."+date.getFullYear();
                 row.insertCell(1).innerHTML= feature.properties.name;
                 row.insertCell(2).innerHTML= feature.properties.catname;
-                row.insertCell(3).innerHTML= dist // da arrotondare
+                row.insertCell(3).innerHTML= dist+' m' //da ridimensionare
             }
 
         }).addTo(map);
@@ -166,6 +166,3 @@ function confirm() {
 function clean() {
   document.getElementById("form1").reset();
 };
-
-
-//function getDistance(lat,lon,){}
