@@ -138,7 +138,8 @@ var ajax = $.ajax({
                 row.insertCell(0).innerHTML= date.getDate()+"."+date.getMonth()+"."+date.getFullYear();
                 row.insertCell(1).innerHTML= feature.properties.name;
                 row.insertCell(2).innerHTML= feature.properties.catname;
-                row.insertCell(3).innerHTML= dist+' m' //da ridimensionare
+                row.insertCell(3).innerHTML= dist;
+                row.insertCell(4).innerHTML= "m";
             }
 
         }).addTo(map);
@@ -151,6 +152,7 @@ var ajax = $.ajax({
 
 
       map.flyTo([lat, lon], zoom);
+      sortTable();
     }
 });}
 
@@ -166,3 +168,29 @@ function confirm() {
 function clean() {
   document.getElementById("form1").reset();
 };
+
+//Function sort table
+function sortTable() {
+  var table, rows, switching, i, r, r1, shouldSwitch;
+  table = document.getElementById("event");
+  switching = true;
+
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+
+    for (i = 2; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      r = rows[i].getElementsByTagName("td")[3].innerHTML;
+      r1 = rows[i + 1].getElementsByTagName("td")[3].innerHTML;
+      if (Number(r) > Number(r1)) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
