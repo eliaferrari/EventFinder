@@ -119,7 +119,8 @@ for (var i = tableHeaderRowCount; i < rowCount; i++) {
     table.deleteRow(tableHeaderRowCount);
   }
 
-
+var deltaLat;
+var deltaLon;
 var ajax = $.ajax({
     url : URL,
     dataType : 'jsonp',
@@ -134,8 +135,18 @@ var ajax = $.ajax({
             },
             onEachFeature: function (feature, layer) {
                 popupOptions = {maxWidth: 300};
+                var lat1 = (feature.geometry["coordinates"][1]);
+                var lon1 = (feature.geometry["coordinates"][0]);
+                deltaLon=lon-lon1;
+                deltaLat=lat-lat1;
+                var a = Math.pow(Math.sin(deltaLat/2), 2) + Math.cos(lat) * Math.cos(lat1) * Math.pow(Math.sin(deltaLon/2), 2);
+                var c = 2 * Math.asin(Math.sqrt(a));
+                var EARTH_RADIUS = 6371;
+                var dist = Math.ceil(c * EARTH_RADIUS * 10); // dovrebbe essere in metri
+                var date = new Date(feature.properties.datum);
+
                 layer.bindPopup(feature.properties.name + "<br> " +
-                feature.properties.datum + "<br><br> " +
+                date.getDate()+"."+date.getMonth()+"."+date.getFullYear() + "<br><br> " +
                 feature.properties.catname + " | " +feature.properties.subcatname + "<br> " +
                 feature.properties.website  + "<br><br> " +
                 feature.properties.beschreibung,popupOptions);
@@ -143,9 +154,11 @@ var ajax = $.ajax({
                 var rowCount = table.rows.length;
                 var row = table.insertRow(rowCount);
 
-                row.insertCell(0).innerHTML= feature.properties.datum;
+                row.insertCell(0).innerHTML= date.getDate()+"."+date.getMonth()+"."+date.getFullYear();
                 row.insertCell(1).innerHTML= feature.properties.name;
-                row.insertCell(2).innerHTML= feature.properties.ort;
+                row.insertCell(2).innerHTML= feature.properties.catname;
+                row.insertCell(3).innerHTML= dist;
+                row.insertCell(4).innerHTML= "m";
             }
 
         }).addTo(map);
@@ -158,6 +171,7 @@ var ajax = $.ajax({
 
 
       map.flyTo([lat, lon], zoom);
+      sortTable();
     }
 });}
 var wait=true;
@@ -189,3 +203,29 @@ checkFlag();
 function clean() {
   document.getElementById("form1").reset();
 };
+
+//Function sort table
+function sortTable() {
+  var table, rows, switching, i, r, r1, shouldSwitch;
+  table = document.getElementById("event");
+  switching = true;
+
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+
+    for (i = 2; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      r = rows[i].getElementsByTagName("td")[3].innerHTML;
+      r1 = rows[i + 1].getElementsByTagName("td")[3].innerHTML;
+      if (Number(r) > Number(r1)) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
