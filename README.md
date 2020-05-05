@@ -21,7 +21,7 @@ Expansion to other states (currently only Switzerland is included).
 ERD Database: https://www.draw.io/#15nodZrNZ8yIbMXXAM2DCIMrhHMEb3SDj
 
 ## Istructions
-1 - Clone the project
+1 - Clone the project /n
 2 - Install PgAdmin or a database manager
 3 - Follow the istruction on https://docs.geoserver.org for the installation and configuration of GeoServer (Java included)
 4 - Set the system enviroment variables for GEOSERVER_DATA_DIR as folder data_dir and for GEOSERVER_HOME as folder GEOSERVER
