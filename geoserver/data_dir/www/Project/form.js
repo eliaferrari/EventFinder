@@ -156,7 +156,7 @@ var ajax = $.ajax({
 
                 row.insertCell(0).innerHTML= date.getDate()+"."+date.getMonth()+"."+date.getFullYear();
                 row.insertCell(1).innerHTML= feature.properties.name;
-                row.insertCell(2).innerHTML= feature.properties.catname;
+                row.insertCell(2).innerHTML= feature.properties.ort;
                 row.insertCell(3).innerHTML= dist;
                 row.insertCell(4).innerHTML= "m";
             }
