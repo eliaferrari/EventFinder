@@ -27,7 +27,7 @@ ERD Database: https://www.draw.io/#15nodZrNZ8yIbMXXAM2DCIMrhHMEb3SDj
 
 3 - Follow the istruction on https://docs.geoserver.org for the installation and configuration of GeoServer (Java included)
 
-4 - Set the system enviroment variables for GEOSERVER_DATA_DIR as folder data_dir and for GEOSERVER_HOME as folder GEOSERVER
+4 - Set the system enviroment variables for GEOSERVER_DATA_DIR as folder 'data_dir' and for GEOSERVER_HOME as folder 'Geoserver' from the github project
 
 5 - Start the Database with the database manager (PgAdmin or similar) and start the GeoServer as istruction on website
 
