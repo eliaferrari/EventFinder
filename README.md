@@ -3,7 +3,9 @@ Website with all kind of events in Switzerland, the javascript integration allow
 
 
 ## Project Structure:
-main.html:     Basic acess with home page
-form.js:       Contain the JavaScript code for the creating of the Leaflet map and the operations
-Geodatabase_PgAdmin:    Backup of the database with some 2020 events in Switzerland
+main.html:     Basic acess with home page.
+
+form.js:       Contain the JavaScript code for the creating of the Leaflet map and the operations.
+
+Geodatabase_PgAdmin:    Backup of the database with some 2020 events in Switzerland.
 
