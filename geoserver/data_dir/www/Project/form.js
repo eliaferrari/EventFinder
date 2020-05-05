@@ -43,7 +43,7 @@ function getLocation() {
 }
 
 //elaborate the content of the location form tab
-var test = "Insert CAP or city";
+var test = "Insert CAP";
 document.getElementById("myLocation").value = test;
 
 function showPosition(position) {
@@ -51,9 +51,28 @@ function showPosition(position) {
   lat = position.coords.latitude
   lon = position.coords.longitude
   document.getElementById("myLocation").value = lat + ";"+ lon;
-
-
 }
+
+function getCAP() {
+    var z = document.getElementById("myLocation").value;
+    var URL1 = 'http://api.geonames.org/findNearbyPostalCodesJSON?postalcode='+z+'&country=CH&radius=10&maxRows=1&username=elia';
+    var ajax1 = $.ajax({
+        url : URL1,
+        dataType : 'json',
+        format_options : 'callback:getJson',
+        success : function (response) {
+            for(var property in response) {
+                var PostalCodes = response[property];
+            for(var prop in PostalCodes){
+                var zero = PostalCodes[prop];
+                lat = zero['lat']
+                lon = zero['lng']
+                wait = false;
+            }}}
+    });
+
+};
+
 function geolocation(){
 
 var owsrootUrl = 'http://localhost:8080/geoserver/eventfinder/ows';
@@ -126,7 +145,7 @@ var ajax = $.ajax({
 
                 row.insertCell(0).innerHTML= feature.properties.datum;
                 row.insertCell(1).innerHTML= feature.properties.name;
-                row.insertCell(2).innerHTML= feature.properties.catname;
+                row.insertCell(2).innerHTML= feature.properties.ort;
             }
 
         }).addTo(map);
@@ -141,15 +160,31 @@ var ajax = $.ajax({
       map.flyTo([lat, lon], zoom);
     }
 });}
+var wait=true;
+function checkFlag() {
+  if(wait == true) {
+     window.setTimeout(checkFlag, 1); /* this checks the flag every 100 milliseconds*/
+  } else {
+    geolocation()
+  }
+};
+
 
 //Function Form
 function confirm() {
+
+  var z = document.getElementById("myLocation").value;
+  if (z=="" || z=="Insert CAP") {
+    alert("Location must be filled out with your PLZ or click on get my location!");
+  }else {
+  getCAP();
+
   map.eachLayer(function (layer) {
       map.removeLayer(WFSLayer);
   });
-  geolocation();
 
-
+checkFlag();
+  }
 };
 function clean() {
   document.getElementById("form1").reset();
