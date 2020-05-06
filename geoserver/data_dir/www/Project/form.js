@@ -75,109 +75,74 @@ function getCAP() {
 
 };
 
-function geolocation() {
+//Funcion for the server request
+var parameters = L.Util.extend(defaultParameters);
+var URL = owsrootUrl + L.Util.getParamString(parameters);
+console.log(URL)
 
-  var owsrootUrl = 'http://localhost:8080/geoserver/eventfinder/ows';
-  //BBOX
-  var radius = ((document.getElementById("umkreis").value) / 100);
-  var y1 = lon - (Math.sqrt(radius * radius * Math.PI) / 2);
-  var y2 = lon + (Math.sqrt(radius * radius * Math.PI) / 2);
-  var x1 = lat - (Math.sqrt(radius * radius * Math.PI) / 2);
-  var x2 = lat + (Math.sqrt(radius * radius * Math.PI) / 2);
-  var comma = ','
-  var stringa = x1.toString().concat(comma, y1.toString(), comma, x2.toString(), comma, y2.toString());
-  //filter by event type
-  var eventtype = document.getElementById("eventtype").value;
-  //filter by date (future events)
-  var eventdate = document.getElementById("eventdate").value.concat(" 00:00:01"); // formato da verificare, deve essere: (yyyy-mm-dd hh:mm:ss)
-
-  var defaultParameters = {
-    service: 'WFS',
-    version: '2.0',
-    request: 'GetFeature',
-    typeNames: 'eventfinder:events',
-    srsName: 'EPSG:4326',
-    outputFormat: 'text/javascript',
-    format_options: 'callback:getJson',
-    cql_filter: "catname=" + "'" + eventtype + "'" + "AND datum>'" + eventdate + "' AND bbox(geom," + stringa + ")", // between (&cql_filter=datum BETWEEN '2020-08-01 00:00:00'AND'2020-08-15 00:00:00')
-  };
-
-  //http://localhost:8080/geoserver/eventfinder/ows?service=WFS&version=2.0&request=GetFeature&typeName=eventfinder:events&outputFormat=text/javascript&cql_filter=catname=%27sport%27
-  //http://localhost:8080/geoserver/eventfinder/ows?service=WFS&version=2.0&request=GetFeature&typeName=eventfinder:events&outputFormat=text/javascript&srsName=EPSG:4326&cql_filter=catname=%27sport%27
-  //http://localhost:8080/geoserver/wfs?service=wfs&version=2.0&request=GetFeature&typeNames=eventfinder:events&cql_filter=datum>'2020-08-30 00:00:00'
-  //http://api.geonames.org/findNearbyPostalCodesJSON?postalcode=3014&country=CH&radius=10&maxRows=1&username=elia
-  //http://localhost:8080/geoserver/eventfinder/ows?service=WFS&version=2.0&request=GetFeature&typeName=eventfinder:events&outputFormat=text/javascript&srsName=EPSG:4326&cql_filter=catname=%27concert%27%20AND%20datum%3E%272020-06-01%2000:00:00%27%20AND%20bbox(geom,45.6,7.7,47.6,8.7)
-
-  //Funcion for the server request
-  var parameters = L.Util.extend(defaultParameters);
-  var URL = owsrootUrl + L.Util.getParamString(parameters);
-  console.log(URL)
-
-  var table = document.getElementById("event");
-  var rowCount = table.rows.length;
-  var row = table.insertRow(rowCount);
-  var tableHeaderRowCount = 1;
-  for (var i = tableHeaderRowCount; i < rowCount; i++) {
+var table = document.getElementById("event");
+var rowCount = table.rows.length;
+var row = table.insertRow(rowCount);
+var tableHeaderRowCount = 1;
+for (var i = tableHeaderRowCount; i < rowCount; i++) {
     table.deleteRow(tableHeaderRowCount);
   }
 
-  var deltaLat;
-  var deltaLon;
-  var ajax = $.ajax({
-    url: URL,
-    dataType: 'jsonp',
-    jsonpCallback: 'getJson',
-    success: function(response) {
-      WFSLayer = L.geoJson(response, {
-        style: function(feature) {
-          return {
-            icon: greenIcon,
-          };
+var deltaLat;
+var deltaLon;
+var ajax = $.ajax({
+    url : URL,
+    dataType : 'jsonp',
+    jsonpCallback : 'getJson',
+    success : function (response) {
+        WFSLayer = L.geoJson(response, {
+            style: function (feature) {
+                return {
+                  icon : greenIcon,
+                };
 
-        },
-        onEachFeature: function(feature, layer) {
-          popupOptions = {
-            maxWidth: 300
-          };
-          var lat1 = (feature.geometry["coordinates"][1]);
-          var lon1 = (feature.geometry["coordinates"][0]);
-          deltaLon = lon - lon1;
-          deltaLat = lat - lat1;
-          var a = Math.pow(Math.sin(deltaLat / 2), 2) + Math.cos(lat) * Math.cos(lat1) * Math.pow(Math.sin(deltaLon / 2), 2);
-          var c = 2 * Math.asin(Math.sqrt(a));
-          var EARTH_RADIUS = 6371;
-          var dist = Math.ceil(c * EARTH_RADIUS * 10); // dovrebbe essere in metri
-          var date = new Date(feature.properties.datum);
+            },
+            onEachFeature: function (feature, layer) {
+                popupOptions = {maxWidth: 300};
 
-          layer.bindPopup(feature.properties.name + "<br> " +
-            date.getDate() + "." + date.getMonth() + "." + date.getFullYear() + "<br><br> " +
-            feature.properties.catname + " | " + feature.properties.subcatname + "<br> " +
-            feature.properties.website + "<br><br> " +
-            feature.properties.beschreibung, popupOptions);
+                // Distance calculation
+                var lat1 = (feature.geometry["coordinates"][1]);
+                var lon1 = (feature.geometry["coordinates"][0]);
+                deltaLon=lon-lon1;
+                var radlat1 = Math.PI * lat/180;
+                var radlat2 = Math.PI * lat1/180;
+                var raddeltalon = Math.PI * deltaLon/180;
+                var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(raddeltalon);
+                dist = Math.acos(dist);
+                dist = dist * 180/Math.PI;
+                dist = Math.ceil(dist*111.189577);
 
-          var rowCount = table.rows.length;
-          var row = table.insertRow(rowCount);
+                //Date transformation
+                var date = new Date(feature.properties.datum);
 
-          row.insertCell(0).innerHTML = date.getDate() + "." + date.getMonth() + "." + date.getFullYear();
-          row.insertCell(1).innerHTML = feature.properties.name;
-          row.insertCell(2).innerHTML = feature.properties.ort;
-          row.insertCell(3).innerHTML = dist;
-          row.insertCell(4).innerHTML = "m";
-        }
+                layer.bindPopup(feature.properties.name + "<br> " +
+                date.getDate()+"."+date.getMonth()+"."+date.getFullYear() + "<br><br> " +
+                feature.properties.catname + " | " +feature.properties.subcatname + "<br> " +
+                feature.properties.website  + "<br><br> " +
+                feature.properties.beschreibung,popupOptions);
 
-      }).addTo(map);
-      var zoom;
-      if ((document.getElementById("umkreis").value) == 10) {
-        zoom = 12;
-      } else if ((document.getElementById("umkreis").value) == 20) {
-        zoom = 11;
-      } else if ((document.getElementById("umkreis").value) == 50) {
-        zoom = 9.5;
-      } else if ((document.getElementById("umkreis").value) == 100) {
-        zoom = 8.5;
-      } else {
-        zoom = 10
-      }
+                var rowCount = table.rows.length;
+                var row = table.insertRow(rowCount);
+
+                row.insertCell(0).innerHTML= date.getDate()+"."+date.getMonth()+"."+date.getFullYear();
+                row.insertCell(1).innerHTML= feature.properties.name;
+                row.insertCell(2).innerHTML= feature.properties.ort;
+                row.insertCell(3).innerHTML= dist;
+                row.insertCell(4).innerHTML= "Km";
+            }
+
+        }).addTo(map);
+        var zoom;
+        if ((document.getElementById("umkreis").value)==10) {zoom =12;}
+        else if ((document.getElementById("umkreis").value)==20) {zoom =11;}
+        else if ((document.getElementById("umkreis").value)==50) {zoom =9.5;}
+        else if ((document.getElementById("umkreis").value)==100) {zoom =8.5;}
+        else { zoom = 10}
 
 
       map.flyTo([lat, lon], zoom);
