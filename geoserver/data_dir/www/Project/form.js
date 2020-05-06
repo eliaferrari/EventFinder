@@ -1,3 +1,5 @@
+//#####     LEAFLET MAP BASIC LAYER     #####
+
 var map = L.map('map').setView([46.9, 8.1], 8);
 
 var original =
@@ -17,24 +19,58 @@ var WFSLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png
   id: 'mapbox.streets'
 }).addTo(map);
 
-var greenIcon = new L.Icon({
-  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41]
-});
 
-
-
-//Geolocation
+//#####     DEFINITION VARIABLE     #####
 var testloc = true;
 var pos = 0;
 var lat;
 var lon;
 var x = document.getElementById("myLocation");
 
+//form basic variables
+var test = "Insert postal code";
+document.getElementById("myLocation").value = test;
+
+//#####     UTILITY FUNCTIONS     #####
+function checkFlag() {
+  if (wait == true) {
+    window.setTimeout(checkFlag, 1); /* this checks the flag every 100 milliseconds*/
+  } else {
+    geolocation()
+  }
+};
+
+
+//Function sort table
+function sortTable() {
+  var table, rows, switching, i, r, r1, shouldSwitch;
+  table = document.getElementById("event");
+  switching = true;
+
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+
+    for (i = 2; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      r = rows[i].getElementsByTagName("td")[3].innerHTML;
+      r1 = rows[i + 1].getElementsByTagName("td")[3].innerHTML;
+      if (Number(r) > Number(r1)) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+
+
+//#####     FUNCTIONS FOR THE GEOLOCATIONING     #####
+
+//automatic recognition of the user location
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
@@ -43,10 +79,7 @@ function getLocation() {
   }
 }
 
-//elaborate the content of the location form tab
-var test = "Insert CAP";
-document.getElementById("myLocation").value = test;
-
+//show the user position (coordinates) in the form
 function showPosition(position) {
   pos = position;
   lat = position.coords.latitude
@@ -55,6 +88,7 @@ function showPosition(position) {
   testloc = false;
 }
 
+//convert the inserted Postal code in coordinate
 function getCAP() {
   var z = document.getElementById("myLocation").value;
   var URL1 = 'http://api.geonames.org/findNearbyPostalCodesJSON?postalcode=' + z + '&country=CH&radius=10&maxRows=1&username=elia';
@@ -74,12 +108,14 @@ function getCAP() {
       }
     }
   });
-
 };
 
+
+//#####     MAIN FUNCTION: REQUEST, FILL TABLE, FILL MAP     #####
 function geolocation() {
 
   var owsrootUrl = 'http://localhost:8080/geoserver/eventfinder/ows';
+
   //BBOX
   var radius = ((document.getElementById("umkreis").value) / 100);
   var y1 = lon - (Math.sqrt(radius * radius * Math.PI) / 2);
@@ -117,6 +153,7 @@ function geolocation() {
     table.deleteRow(tableHeaderRowCount);
   }
 
+  //request with AJAX
   var deltaLat;
   var deltaLon;
   var ajax = $.ajax({
@@ -136,25 +173,27 @@ function geolocation() {
             maxWidth: 300
           };
           // Distance calculation
-                  var lat1 = (feature.geometry["coordinates"][1]);
-                  var lon1 = (feature.geometry["coordinates"][0]);
-                  deltaLon=lon-lon1;
-                  var radlat1 = Math.PI * lat/180;
-                  var radlat2 = Math.PI * lat1/180;
-                  var raddeltalon = Math.PI * deltaLon/180;
-                  var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(raddeltalon);
-                  dist = Math.acos(dist);
-                  dist = dist * 180/Math.PI;
-                  dist = Math.ceil(dist*111.189577);
-                  //Date transformation
+          var lat1 = (feature.geometry["coordinates"][1]);
+          var lon1 = (feature.geometry["coordinates"][0]);
+          deltaLon = lon - lon1;
+          var radlat1 = Math.PI * lat / 180;
+          var radlat2 = Math.PI * lat1 / 180;
+          var raddeltalon = Math.PI * deltaLon / 180;
+          var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(raddeltalon);
+          dist = Math.acos(dist);
+          dist = dist * 180 / Math.PI;
+          dist = Math.ceil(dist * 111.189577);
+          //Date transformation
           var date = new Date(feature.properties.datum);
 
+
+          //Map PopUp
           layer.bindPopup(feature.properties.name + "<br> " +
             date.getDate() + "." + date.getMonth() + "." + date.getFullYear() + "<br><br> " +
             feature.properties.catname + " | " + feature.properties.subcatname + "<br> " +
-            feature.properties.website + "<br><br> " +
-            feature.properties.beschreibung, popupOptions);
+            feature.properties.website, popupOptions);
 
+          //Fill table
           var rowCount = table.rows.length;
           var row = table.insertRow(rowCount);
 
@@ -166,13 +205,15 @@ function geolocation() {
         }
 
       }).addTo(map);
+
+      //automatically adjust zoom
       var zoom;
       if ((document.getElementById("umkreis").value) == 10) {
-        zoom = 12;
+        zoom = 12.5;
       } else if ((document.getElementById("umkreis").value) == 20) {
-        zoom = 11;
+        zoom = 12;
       } else if ((document.getElementById("umkreis").value) == 50) {
-        zoom = 9.5;
+        zoom = 10;
       } else if ((document.getElementById("umkreis").value) == 100) {
         zoom = 8.5;
       } else {
@@ -187,66 +228,32 @@ function geolocation() {
 }
 var wait = true;
 
-function checkFlag() {
-  if (wait == true) {
-    window.setTimeout(checkFlag, 1); /* this checks the flag every 100 milliseconds*/
-  } else {
-    geolocation()
-  }
-};
 
 
-//Function Form
+
+//#####     FORM BUTTON FUNCTIONS     #####
 function confirm() {
-
+  var testloc = true;
   var z = document.getElementById("myLocation").value;
+
+  //control inserted values
   if (z == "" || z == "Insert CAP") {
     alert("Location must be filled out with your PLZ or click on get my location!");
-  }
-  else if (testloc == false) {
+  } else if (testloc == false) {
     map.eachLayer(function(layer) {
       map.removeLayer(WFSLayer);
     });
-
-  geolocation()
-  }
-   else {
+    geolocation()
+  } else {
     getCAP();
-
     map.eachLayer(function(layer) {
       map.removeLayer(WFSLayer);
     });
-
     checkFlag();
   }
 };
 
+//button erase form content
 function clean() {
   document.getElementById("form1").reset();
 };
-
-//Function sort table
-function sortTable() {
-  var table, rows, switching, i, r, r1, shouldSwitch;
-  table = document.getElementById("event");
-  switching = true;
-
-  while (switching) {
-    switching = false;
-    rows = table.rows;
-
-    for (i = 2; i < (rows.length - 1); i++) {
-      shouldSwitch = false;
-      r = rows[i].getElementsByTagName("td")[3].innerHTML;
-      r1 = rows[i + 1].getElementsByTagName("td")[3].innerHTML;
-      if (Number(r) > Number(r1)) {
-        shouldSwitch = true;
-        break;
-      }
-    }
-    if (shouldSwitch) {
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
-    }
-  }
-}
