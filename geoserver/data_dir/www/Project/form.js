@@ -29,7 +29,8 @@ var greenIcon = new L.Icon({
 
 
 //Geolocation
-var pos = 0
+var testloc = true;
+var pos = 0;
 var lat;
 var lon;
 var x = document.getElementById("myLocation");
@@ -51,6 +52,7 @@ function showPosition(position) {
   lat = position.coords.latitude
   lon = position.coords.longitude
   document.getElementById("myLocation").value = lat + ";" + lon;
+  testloc = false;
 }
 
 function getCAP() {
@@ -75,74 +77,107 @@ function getCAP() {
 
 };
 
-//Funcion for the server request
-var parameters = L.Util.extend(defaultParameters);
-var URL = owsrootUrl + L.Util.getParamString(parameters);
-console.log(URL)
+function geolocation() {
 
-var table = document.getElementById("event");
-var rowCount = table.rows.length;
-var row = table.insertRow(rowCount);
-var tableHeaderRowCount = 1;
-for (var i = tableHeaderRowCount; i < rowCount; i++) {
+  var owsrootUrl = 'http://localhost:8080/geoserver/eventfinder/ows';
+  //BBOX
+  var radius = ((document.getElementById("umkreis").value) / 100);
+  var y1 = lon - (Math.sqrt(radius * radius * Math.PI) / 2);
+  var y2 = lon + (Math.sqrt(radius * radius * Math.PI) / 2);
+  var x1 = lat - (Math.sqrt(radius * radius * Math.PI) / 2);
+  var x2 = lat + (Math.sqrt(radius * radius * Math.PI) / 2);
+  var comma = ','
+  var stringa = x1.toString().concat(comma, y1.toString(), comma, x2.toString(), comma, y2.toString());
+  //filter by event type
+  var eventtype = document.getElementById("eventtype").value;
+  //filter by date (future events)
+  var eventdate = document.getElementById("eventdate").value.concat(" 00:00:01"); // formato da verificare, deve essere: (yyyy-mm-dd hh:mm:ss)
+
+  var defaultParameters = {
+    service: 'WFS',
+    version: '2.0',
+    request: 'GetFeature',
+    typeNames: 'eventfinder:events',
+    srsName: 'EPSG:4326',
+    outputFormat: 'text/javascript',
+    format_options: 'callback:getJson',
+    cql_filter: "catname=" + "'" + eventtype + "'" + "AND datum>'" + eventdate + "' AND bbox(geom," + stringa + ")", // between (&cql_filter=datum BETWEEN '2020-08-01 00:00:00'AND'2020-08-15 00:00:00')
+  };
+
+  //Funcion for the server request
+  var parameters = L.Util.extend(defaultParameters);
+  var URL = owsrootUrl + L.Util.getParamString(parameters);
+  console.log(URL)
+
+  var table = document.getElementById("event");
+  var rowCount = table.rows.length;
+  var row = table.insertRow(rowCount);
+  var tableHeaderRowCount = 1;
+  for (var i = tableHeaderRowCount; i < rowCount; i++) {
     table.deleteRow(tableHeaderRowCount);
   }
 
-var deltaLat;
-var deltaLon;
-var ajax = $.ajax({
-    url : URL,
-    dataType : 'jsonp',
-    jsonpCallback : 'getJson',
-    success : function (response) {
-        WFSLayer = L.geoJson(response, {
-            style: function (feature) {
-                return {
-                  icon : greenIcon,
-                };
+  var deltaLat;
+  var deltaLon;
+  var ajax = $.ajax({
+    url: URL,
+    dataType: 'jsonp',
+    jsonpCallback: 'getJson',
+    success: function(response) {
+      WFSLayer = L.geoJson(response, {
+        style: function(feature) {
+          return {
+            icon: greenIcon,
+          };
 
-            },
-            onEachFeature: function (feature, layer) {
-                popupOptions = {maxWidth: 300};
+        },
+        onEachFeature: function(feature, layer) {
+          popupOptions = {
+            maxWidth: 300
+          };
+          // Distance calculation
+                  var lat1 = (feature.geometry["coordinates"][1]);
+                  var lon1 = (feature.geometry["coordinates"][0]);
+                  deltaLon=lon-lon1;
+                  var radlat1 = Math.PI * lat/180;
+                  var radlat2 = Math.PI * lat1/180;
+                  var raddeltalon = Math.PI * deltaLon/180;
+                  var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(raddeltalon);
+                  dist = Math.acos(dist);
+                  dist = dist * 180/Math.PI;
+                  dist = Math.ceil(dist*111.189577);
+                  //Date transformation
+          var date = new Date(feature.properties.datum);
 
-                // Distance calculation
-                var lat1 = (feature.geometry["coordinates"][1]);
-                var lon1 = (feature.geometry["coordinates"][0]);
-                deltaLon=lon-lon1;
-                var radlat1 = Math.PI * lat/180;
-                var radlat2 = Math.PI * lat1/180;
-                var raddeltalon = Math.PI * deltaLon/180;
-                var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(raddeltalon);
-                dist = Math.acos(dist);
-                dist = dist * 180/Math.PI;
-                dist = Math.ceil(dist*111.189577);
+          layer.bindPopup(feature.properties.name + "<br> " +
+            date.getDate() + "." + date.getMonth() + "." + date.getFullYear() + "<br><br> " +
+            feature.properties.catname + " | " + feature.properties.subcatname + "<br> " +
+            feature.properties.website + "<br><br> " +
+            feature.properties.beschreibung, popupOptions);
 
-                //Date transformation
-                var date = new Date(feature.properties.datum);
+          var rowCount = table.rows.length;
+          var row = table.insertRow(rowCount);
 
-                layer.bindPopup(feature.properties.name + "<br> " +
-                date.getDate()+"."+date.getMonth()+"."+date.getFullYear() + "<br><br> " +
-                feature.properties.catname + " | " +feature.properties.subcatname + "<br> " +
-                feature.properties.website  + "<br><br> " +
-                feature.properties.beschreibung,popupOptions);
+          row.insertCell(0).innerHTML = date.getDate() + "." + date.getMonth() + "." + date.getFullYear();
+          row.insertCell(1).innerHTML = feature.properties.name;
+          row.insertCell(2).innerHTML = feature.properties.ort;
+          row.insertCell(3).innerHTML = dist;
+          row.insertCell(4).innerHTML = "km";
+        }
 
-                var rowCount = table.rows.length;
-                var row = table.insertRow(rowCount);
-
-                row.insertCell(0).innerHTML= date.getDate()+"."+date.getMonth()+"."+date.getFullYear();
-                row.insertCell(1).innerHTML= feature.properties.name;
-                row.insertCell(2).innerHTML= feature.properties.ort;
-                row.insertCell(3).innerHTML= dist;
-                row.insertCell(4).innerHTML= "Km";
-            }
-
-        }).addTo(map);
-        var zoom;
-        if ((document.getElementById("umkreis").value)==10) {zoom =12;}
-        else if ((document.getElementById("umkreis").value)==20) {zoom =11;}
-        else if ((document.getElementById("umkreis").value)==50) {zoom =9.5;}
-        else if ((document.getElementById("umkreis").value)==100) {zoom =8.5;}
-        else { zoom = 10}
+      }).addTo(map);
+      var zoom;
+      if ((document.getElementById("umkreis").value) == 10) {
+        zoom = 12;
+      } else if ((document.getElementById("umkreis").value) == 20) {
+        zoom = 11;
+      } else if ((document.getElementById("umkreis").value) == 50) {
+        zoom = 9.5;
+      } else if ((document.getElementById("umkreis").value) == 100) {
+        zoom = 8.5;
+      } else {
+        zoom = 10
+      }
 
 
       map.flyTo([lat, lon], zoom);
@@ -167,7 +202,15 @@ function confirm() {
   var z = document.getElementById("myLocation").value;
   if (z == "" || z == "Insert CAP") {
     alert("Location must be filled out with your PLZ or click on get my location!");
-  } else {
+  }
+  else if (testloc == false) {
+    map.eachLayer(function(layer) {
+      map.removeLayer(WFSLayer);
+    });
+
+  geolocation()
+  }
+   else {
     getCAP();
 
     map.eachLayer(function(layer) {
