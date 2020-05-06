@@ -100,12 +100,6 @@ var defaultParameters = {
     cql_filter : "catname="+"'"+eventtype+"'"+"AND datum>'"+eventdate+"' AND bbox(geom,"+stringa+")",// between (&cql_filter=datum BETWEEN '2020-08-01 00:00:00'AND'2020-08-15 00:00:00')
 };
 
-//http://localhost:8080/geoserver/eventfinder/ows?service=WFS&version=2.0&request=GetFeature&typeName=eventfinder:events&outputFormat=text/javascript&cql_filter=catname=%27sport%27
-//http://localhost:8080/geoserver/eventfinder/ows?service=WFS&version=2.0&request=GetFeature&typeName=eventfinder:events&outputFormat=text/javascript&srsName=EPSG:4326&cql_filter=catname=%27sport%27
-//http://localhost:8080/geoserver/wfs?service=wfs&version=2.0&request=GetFeature&typeNames=eventfinder:events&cql_filter=datum>'2020-08-30 00:00:00'
-//http://api.geonames.org/findNearbyPostalCodesJSON?postalcode=3014&country=CH&radius=10&maxRows=1&username=elia
-//http://localhost:8080/geoserver/eventfinder/ows?service=WFS&version=2.0&request=GetFeature&typeName=eventfinder:events&outputFormat=text/javascript&srsName=EPSG:4326&cql_filter=catname=%27concert%27%20AND%20datum%3E%272020-06-01%2000:00:00%27%20AND%20bbox(geom,45.6,7.7,47.6,8.7)
-
 //Funcion for the server request
 var parameters = L.Util.extend(defaultParameters);
 var URL = owsrootUrl + L.Util.getParamString(parameters);
@@ -135,14 +129,20 @@ var ajax = $.ajax({
             },
             onEachFeature: function (feature, layer) {
                 popupOptions = {maxWidth: 300};
+
+                // Distance calculation
                 var lat1 = (feature.geometry["coordinates"][1]);
                 var lon1 = (feature.geometry["coordinates"][0]);
                 deltaLon=lon-lon1;
-                deltaLat=lat-lat1;
-                var a = Math.pow(Math.sin(deltaLat/2), 2) + Math.cos(lat) * Math.cos(lat1) * Math.pow(Math.sin(deltaLon/2), 2);
-                var c = 2 * Math.asin(Math.sqrt(a));
-                var EARTH_RADIUS = 6371;
-                var dist = Math.ceil(c * EARTH_RADIUS * 10); // dovrebbe essere in metri
+                var radlat1 = Math.PI * lat/180;
+                var radlat2 = Math.PI * lat1/180;
+                var raddeltalon = Math.PI * deltaLon/180;
+                var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(raddeltalon);
+                dist = Math.acos(dist);
+                dist = dist * 180/Math.PI;
+                dist = Math.ceil(dist*111.189577);
+
+                //Date transformation
                 var date = new Date(feature.properties.datum);
 
                 layer.bindPopup(feature.properties.name + "<br> " +
@@ -158,7 +158,7 @@ var ajax = $.ajax({
                 row.insertCell(1).innerHTML= feature.properties.name;
                 row.insertCell(2).innerHTML= feature.properties.ort;
                 row.insertCell(3).innerHTML= dist;
-                row.insertCell(4).innerHTML= "m";
+                row.insertCell(4).innerHTML= "Km";
             }
 
         }).addTo(map);
