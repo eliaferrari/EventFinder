@@ -187,9 +187,10 @@ function geolocation() {
           var date = new Date(feature.properties.datum);
 
 
+
           //Map PopUp
           layer.bindPopup(feature.properties.name + "<br> " +
-            date.getDate() + "." + date.getMonth() + "." + date.getFullYear() + "<br><br> " +
+            date.getDate() + "." +(date.getMonth()+1) + "." + date.getFullYear() + "<br><br> " +
             feature.properties.catname + " | " + feature.properties.subcatname + "<br> " +
             feature.properties.website, popupOptions);
 
@@ -197,7 +198,7 @@ function geolocation() {
           var rowCount = table.rows.length;
           var row = table.insertRow(rowCount);
 
-          row.insertCell(0).innerHTML = date.getDate() + "." + date.getMonth() + "." + date.getFullYear();
+          row.insertCell(0).innerHTML = date.getDate() + "." + (date.getMonth()+1) + "." + date.getFullYear();
           row.insertCell(1).innerHTML = feature.properties.name;
           row.insertCell(2).innerHTML = feature.properties.ort;
           row.insertCell(3).innerHTML = dist;
@@ -233,7 +234,7 @@ var wait = true;
 
 //#####     FORM BUTTON FUNCTIONS     #####
 function confirm() {
-  var testloc = true;
+
   var z = document.getElementById("myLocation").value;
 
   //control inserted values
@@ -250,10 +251,13 @@ function confirm() {
       map.removeLayer(WFSLayer);
     });
     checkFlag();
+
   }
+  testloc = true;
 };
 
 //button erase form content
 function clean() {
+  testloc = true
   document.getElementById("form1").reset();
 };
